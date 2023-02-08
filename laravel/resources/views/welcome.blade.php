@@ -34,7 +34,8 @@
       </div>
       <div class="heading">
         <ul>
-          <button class="button" id="Ok"><a href= "imgsrh.html"><img src="https://fonts.gstatic.com/s/i/productlogos/lens_camera/v1/192px.svg" alt="car" width="30" height="25"></a></button>
+          <button class="button" id="Ok"><a href= "imgsrh.html"><img src="{{ asset('img/header/google lens.webp') }}" alt="car" width="30" height="25"></a></button>
+          <button class="button" id="Ok"><a href= "imgsrh.html"><img src="{{ asset('img/header/google mic.png') }}" alt="car" width="30" height="25"></a></button>
           <li><a href="#" class="under">HOME</a></li>
           <li><a href="#section2" class="under">SHOP</a></li>
           <li><a href="#section2"class="under">OUR PRODUCTS</a></li>

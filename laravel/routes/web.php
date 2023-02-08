@@ -22,6 +22,14 @@ Route::get('/individual', function () {
     return view('shop/individual');
 });
 
+Route::get('/cart', function () {
+    return view('shop/cartpage');
+});
+
+Route::get('/shipping', function () {
+    return view('shop/shipping');
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
