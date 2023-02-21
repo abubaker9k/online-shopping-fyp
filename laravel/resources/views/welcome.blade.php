@@ -1,52 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+@extends('layouts.frontend.main')
 
-    <link rel="stylesheet" href="style.css">
-    <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{{ asset('css/homepage.css') }} ">
-  </head>
-  
-  <body>
-    <header>
-      <div class="logo"><a href="#">CWR Shop</a></div>
-      <div class="menu">
-        <a href="#">
-          <ion-icon name="close" class="close"></ion-icon>
-        </a>
-  
-        <ul>
-          <li><a href="#" class="under">HOME</a></li>
-          <li><a href="#" class="under">SHOP</a></li>
-          <li><a href="#" class="under">OUR PRODUCTS</a></li>
-          <li><a href="#" class="under">CONTACT US</a></li>
-          <li><a href="#" class="under">ABOUT US</a></li>
-        </ul>
-      </div>
-      <div class="search">
-  
-        <form class="example" action="/action_page.php" style="margin:auto;max-width:300px">
-          <input type="text" placeholder="Search.." name="search2">
-          <button type="submit"><i class="fa fa-search"></i></button>
-        </form>
-      </div>
-      <div class="heading">
-        <ul>
-          <button class="button" id="Ok"><a href= "imgsrh.html"><img src="{{ asset('img/header/google lens.webp') }}" alt="car" width="30" height="25"></a></button>
-          <button class="button" id="Ok"><a href= "imgsrh.html"><img src="{{ asset('img/header/google mic.png') }}" alt="car" width="30" height="25"></a></button>
-          <li><a href="#" class="under">HOME</a></li>
-          <li><a href="#section2" class="under">SHOP</a></li>
-          <li><a href="#section2"class="under">OUR PRODUCTS</a></li>
-          <li><a href="#footer" class="under">CONTACT US</a></li>
-          <li><a href="#footer" class="under">ABOUT US</a></li>
-        </ul>
-      </div>
-      <div class="heading1">
-        <ion-icon name="menu" class="ham"></ion-icon>
-      </div>
-    </header>
+@section('main-section')
     <section>
       <div class="section">
         <div class="section1">
@@ -57,7 +11,7 @@
             <img src="https://images.pexels.com/photos/1229861/pexels-photo-1229861.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="" class="img">
             <img src="https://images.pexels.com/photos/1598505/pexels-photo-1598505.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="" class="img">
           </div>
-  
+
         </div>
         <div id="section2" class="section2">
           <div class="container">
@@ -170,68 +124,9 @@
               <div class="info">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</div>
             </div>
           </div>
-  
+
         </div>
       </div>
-  
+
     </section>
-    <footer>
-      <div id="footer" class="footer0">
-        <h1>CODEWITHRANDOM</h1>
-      </div>
-      <div class="footer1 ">
-        Connect with us at<div class="social-media">
-          <a href="#">
-            <ion-icon name="logo-facebook"></ion-icon>
-          </a>
-          <a href="#">
-            <ion-icon name="logo-linkedin"></ion-icon>
-          </a>
-          <a href="#">
-            <ion-icon name="logo-youtube"></ion-icon>
-          </a>
-          <a href="#">
-            <ion-icon name="logo-instagram"></ion-icon>
-          </a>
-          <a href="#">
-            <ion-icon name="logo-twitter"></ion-icon>
-          </a>
-        </div>
-      </div>
-      <div class="footer2">
-        <div class="product">
-          <div class="heading">Products</div>
-          <div class="div">Sell your Products</div>
-          <div class="div">Advertise</div>
-          <div class="div">Pricing</div>
-          <div class="div">Product Buisness</div>
-  
-        </div>
-        <div class="services">
-          <div class="heading">Services</div>
-          <div class="div">Return</div>
-          <div class="div">Cash Back</div>
-          <div class="div">Affiliate Marketing</div>
-          <div class="div">Others</div>
-        </div>
-        <div class="Company">
-          <div class="heading">Company</div>
-          <div class="div">Complaint</div>
-          <div class="div">Careers</div>
-          <div class="div">Affiliate Marketing</div>
-          <div class="div">Support</div>
-        </div>
-        <div class="Get Help">
-          <div class="heading">Get Help</div>
-          <div class="div">Help Center</div>
-          <div class="div">Privacy Policy</div>
-          <div class="div">Terms</div>
-          <div class="div">Login</div>
-        </div>
-      </div>
-      <div class="footer3">Copyright © <h4>ShoPperZ</h4> 2021-2028</div>
-    </footer>
-  
-  </body>
-  
-  </html>
+@endsection
