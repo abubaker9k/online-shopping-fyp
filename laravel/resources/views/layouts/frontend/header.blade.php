@@ -11,7 +11,7 @@
 
   <body>
     <header>
-      <div class="logo"><a href="#">CWR Shop</a></div>
+      <div class="logo"><a href="{{url('/')}}">CWR Shop</a></div>
       <div class="menu">
         <a href="#">
           <ion-icon name="close" class="close"></ion-icon>
@@ -34,14 +34,14 @@
       </div>
       <div class="heading">
         <ul>
-          <button class="button" id="Ok"><a href= "imgsrh.html"><img src="{{ asset('img/header/google lens.webp') }}" alt="car" width="30" height="25"></a></button>
-          <button class="button" id="Ok"><a href= "imgsrh.html"><img src="{{ asset('img/header/google mic.png') }}" alt="car" width="30" height="25"></a></button>
-          <li><a href="#" class="under">HOME</a></li>
-          <li><a href="#section2" class="under">SHOP</a></li>
-          <li><a href="#section2"class="under">OUR PRODUCTS</a></li>
-          <li><a href="#footer" class="under">CONTACT US</a></li>
-          <li><a href="#footer" class="under">ABOUT US</a></li>
-          <li><a href="#footer" class="under">ABOUT US</a></li>
+          <button class="button" id="Ok"><a href= "{{url('/image-search')}}"><img src="{{ asset('img/header/google lens.webp') }}" alt="car" width="30" height="25"></a></button>
+          <button class="button" id="Ok"><a href= "{{url('/voice-search')}}"><img src="{{ asset('img/header/google mic.png') }}" alt="car" width="30" height="25"></a></button>
+          <li><a href= "{{url('/')}}" class="under">HOME</a></li>
+          <li><a href="{{url('/shop')}}" class="under">SHOP</a></li>
+
+          <li><a href="/login" class="under">Login</a></li>
+          <li><a href="/register" class="under">Register</a></li>
+
           <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
 
                 </div>

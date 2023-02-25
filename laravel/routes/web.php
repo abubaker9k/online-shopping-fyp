@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ImageSearchController;
+use App\Http\Controllers\VoiceSearchController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/shop',[ProductController::class,'index']);
+Route::get('/image-search',[ImageSearchController::class,'index']);
+Route::get('/voice-search',[VoiceSearchController::class,'index']);
 
 Route::get('/', function () {
     return view('welcome');
@@ -33,6 +40,14 @@ Route::get('/shipping', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/product', function () {
+    return view('backend/product_add');
+})->middleware(['auth', 'verified'])->name('product_add');
+
+Route::get('/register', function () {
+    return view('auth/register');
+})->middleware(['auth', 'verified'])->name('register');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

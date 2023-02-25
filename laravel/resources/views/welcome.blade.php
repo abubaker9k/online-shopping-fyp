@@ -13,10 +13,12 @@
           </div>
 
         </div>
+        <h1>Top Products</h1>
         <div id="section2" class="section2">
           <div class="container">
+
             <div class="items">
-              <div class="img img1"><button class="button" id="Ok"><a href= "C:\Users\Administrator\Desktop\basit\FYP\product-page\Pindex.html"><img src="https://images.pexels.com/photos/1464625/pexels-photo-1464625.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt=""></a></div></button>
+              <div class="img img1"><button class="button" id="Ok"><a href= "{{ url('/individual') }}"><img src="https://images.pexels.com/photos/1464625/pexels-photo-1464625.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt=""></a></div></button>
               <div class="name">SHOES</div>
               <div class="price">$5</div>
               <div class="info">Lorem ipsum dolor sit amet consectetur.</div>
@@ -51,6 +53,10 @@
               <div class="price">$18</div>
               <div class="info">Lorem ipsum dolor sit amet consectetur.</div>
             </div>
+            <br>
+            <section>
+            <h1>Sale Products</h1>
+         </section>
             <div class="items">
               <div class="img img1"><button class="button" id="Ok"><a href= "C:\Users\Administrator\Desktop\basit\FYP\product-page\Pindex.html"><img src="https://images.pexels.com/photos/4295985/pexels-photo-4295985.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt=""></a></div></button>
               <div class="name">HOODIES</div>
@@ -81,12 +87,15 @@
               <div class="price">$30</div>
               <div class="info">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</div>
             </div>
+            <h1>New Products</h1>
             <div class="items">
               <div class="img img1"><button class="button" id="Ok"><a href= "C:\Users\Administrator\Desktop\basit\FYP\product-page\Pindex.html"><img src="https://media.istockphoto.com/photos/black-coffee-maker-with-green-led-lights-picture-id177395430" alt=""></a></div></button>
               <div class="name">COFFEE MAKER</div>
               <div class="price">$29.7</div>
               <div class="info">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</div>
             </div>
+            <br>
+
             <div class="items">
               <div class="img img1"><button class="button" id="Ok"><a href= "C:\Users\Administrator\Desktop\basit\FYP\product-page\Pindex.html"><img src="https://images.pexels.com/photos/6606354/pexels-photo-6606354.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt=""></a></div></button>
               <div class="name">BED</div>
@@ -99,30 +108,7 @@
               <div class="price">$78</div>
               <div class="info">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</div>
             </div>
-            <div class="items">
-              <div class="img img1"><button class="button" id="Ok"><a href= "C:\Users\Administrator\Desktop\basit\FYP\product-page\Pindex.html"><img src="https://images.pexels.com/photos/5834/nature-grass-leaf-green.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt=""></a></div></button>
-              <div class="name">BOOK</div>
-              <div class="price">$9</div>
-              <div class="info">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</div>
-            </div>
-            <div class="items">
-              <div class="img img1"><button class="button" id="Ok"><a href= "C:\Users\Administrator\Desktop\basit\FYP\product-page\Pindex.html"><img src="https://images.pexels.com/photos/4339598/pexels-photo-4339598.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt=""></a></div></button>
-              <div class="name">BAG</div>
-              <div class="price">$36.5</div>
-              <div class="info">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</div>
-            </div>
-            <div class="items">
-              <div class="img img1"><button class="button" id="Ok"><a href= "C:\Users\Administrator\Desktop\basit\FYP\product-page\Pindex.html"><img src="https://media.istockphoto.com/photos/hand-of-a-lady-selecting-yellow-colored-saree-in-a-shop-picture-id1301740530" alt=""></a></div></button>
-              <div class="name">SAREES</div>
-              <div class="price">$25.6</div>
-              <div class="info">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</div>
-            </div>
-            <div class="items">
-              <div class="img img1"><button class="button" id="Ok"><a href= "C:\Users\Administrator\Desktop\basit\FYP\product-page\Pindex.html"><img src="https://images.pexels.com/photos/5816934/pexels-photo-5816934.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt=""></a></div></button>
-              <div class="name">WASHING MACHINE</div>
-              <div class="price">$56</div>
-              <div class="info">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</div>
-            </div>
+
           </div>
 
         </div>
