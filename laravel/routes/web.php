@@ -5,6 +5,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ImageSearchController;
 use App\Http\Controllers\VoiceSearchController;
 use Illuminate\Support\Facades\Route;
+use App\Models\Product;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/product-test',  function(){
+    $product = Product::all();
+    echo "<pre>";
+    print_r($product);
+});
 
 Route::get('/shop',[ProductController::class,'index']);
 Route::get('/image-search',[ImageSearchController::class,'index']);
