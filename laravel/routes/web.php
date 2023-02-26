@@ -18,13 +18,13 @@ use App\Models\Product;
 |
 */
 
-Route::get('/product-test',  function(){
-    $product = Product::all();
-    echo "<pre>";
-    print_r($product);
-});
+// Route::get('/product-test',  function(){
+//     $product = Product::all();
+//     echo "<pre>";
+//     print_r($product);
+// });
 
-Route::get('/shop',[ProductController::class,'index']);
+Route::get('/shop',[ProductController::class,'view']);
 Route::get('/image-search',[ImageSearchController::class,'index']);
 Route::get('/voice-search',[VoiceSearchController::class,'index']);
 
@@ -32,13 +32,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/individual', function () {
-    return view('shop/individual');
-});
+Route::get('/individual/{id}', [ProductController::class,'show']);
+Route::get('/cart/{id}', [ProductController::class,'show_cart']);
 
-Route::get('/cart', function () {
-    return view('shop/cartpage');
-});
+// Route::get('/cart', function () {
+//     return view('shop/cartpage');
+// });
 
 Route::get('/shipping', function () {
     return view('shop/shipping');
@@ -51,6 +50,8 @@ Route::get('/dashboard', function () {
 Route::get('/product', function () {
     return view('backend/product_add');
 })->middleware(['auth', 'verified'])->name('product_add');
+
+Route::post('/product', [ProductController::class,'store']);
 
 Route::get('/register', function () {
     return view('auth/register');

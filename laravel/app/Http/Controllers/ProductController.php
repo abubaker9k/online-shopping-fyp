@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class ProductController extends Controller
 {
@@ -34,7 +35,14 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // echo '<pre>';
+        // print_r($request->all());
+
+        $product = new Product;
+        $product-> product_name = $request['product_name'];
+        $product-> category = $request['category'];
+        $product->save();
+
     }
 
     /**
@@ -45,7 +53,18 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        echo ' i am show from product controller';
+        $product = Product::find($id);
+        $data = compact('product');
+        return view('shop.individual')->with($data);
+    }
+
+    public function show_cart($id)
+    {
+
+        $product = Product::find($id);
+        $data = compact('product');
+        return view('shop.cart')->with($data);
     }
 
     /**
@@ -80,5 +99,12 @@ class ProductController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function view()
+    {
+        $product = Product::all();
+        $data = compact('product');
+        return view('shop.shop')->with($data);
     }
 }

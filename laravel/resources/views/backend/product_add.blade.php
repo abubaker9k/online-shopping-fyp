@@ -1,7 +1,39 @@
 
 <h1> Add new product</h1>
 
-<x-guest-layout>
+
+
+<form action="{{ url('/') }}/product" method = 'post'>
+@csrf
+<div class="container">
+    <h1>Product Name</h1>
+    <p>Please fill in this form to create an account.</p>
+    <hr>
+
+    <label for="email"><b>Product Name</b></label>
+    <input type="text" placeholder="Enter Email" name="product_name" id="product_name"  value='{{old("product_name")}}'>
+    <span>
+    @error('product_name')
+    {{$message}}
+    @enderror
+    </span>
+
+    <label for="psw"><b>Category</b></label>
+    <input type="password" placeholder="Enter Password" name="category" id="category" value='{{old("category")}}'>
+    <span>
+    @error('category')
+    {{$message}}
+    @enderror
+    </span>
+
+    <hr>
+    <input type="submit" value="Submit">
+  </div>
+
+</form>
+
+
+{{-- <x-guest-layout>
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
@@ -25,4 +57,4 @@
             </x-primary-button>
         </div>
     </form>
-</x-guest-layout>
+</x-guest-layout> --}}

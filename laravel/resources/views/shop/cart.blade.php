@@ -41,7 +41,7 @@
 
         <div class="col col-pro layout-inline">
           <img src="http://static.ddmcdn.com/gif/10-kitten-cuteness-1.jpg" alt="kitten" />
-          <p>Happy Little Critter</p>
+          <p>{{ $product->product_name }}</p>
         </div>
 
         <div class="col col-price col-numeric align-center ">
