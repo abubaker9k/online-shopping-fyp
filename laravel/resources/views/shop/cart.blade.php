@@ -22,7 +22,7 @@
 
   <div class="cart transition is-open">
 
-    <a href="{{ url('/shipping') }}" class="btn btn-update">Update cart</a>
+    <a href="{{ url('/shipping') }}" class="btn btn-update">Add To Shipping </a>
 
 
     <div class="table">
@@ -61,56 +61,7 @@
         </div>
       </div>
 
-      <div class="layout-inline row row-bg2">
 
-        <div class="col col-pro layout-inline">
-          <img src="http://lovemeow.com/wp-content/uploads/2012/05/kitten81.jpg" alt="kitten" />
-          <p>Scared Little Kittie</p>
-        </div>
-
-        <div class="col col-price col-numeric align-center ">
-          <p>£23.99</p>
-        </div>
-
-        <div class="col col-qty  layout-inline">
-          <a href="#" class="qty qty-minus ">-</a>
-            <input type="numeric" value="1" />
-          <a href="#" class="qty qty-plus">+</a>
-        </div>
-
-        <div class="col col-vat col-numeric">
-          <p>£1.95</p>
-        </div>
-        <div class="col col-total col-numeric">
-          <p>£25.94</p>
-        </div>
-
-      </div>
-
-       <div class="layout-inline row">
-
-        <div class="col col-pro layout-inline">
-          <img src="http://cdn.cutestpaw.com/wp-content/uploads/2012/04/l-my-first-kitten.jpg" alt="kitten" />
-          <p>Curious Little Begger</p>
-        </div>
-
-        <div class="col col-price col-numeric align-center ">
-          <p>£59.99</p>
-        </div>
-
-        <div class="col col-qty layout-inline">
-          <a href="#" class="qty qty-minus">-</a>
-            <input type="numeric" value="3" />
-          <a href="#" class="qty qty-plus">+</a>
-        </div>
-
-        <div class="col col-vat col-numeric">
-          <p>£2.95</p>
-        </div>
-         <div class="col col-total col-numeric">
-           <p>£182.95</p>
-         </div>
-      </div>
 
        <div class="tf">
          <div class="row layout-inline">
@@ -133,9 +84,6 @@
          </div>
        </div>
   </div>
-
-    <a href="#" class="btn btn-update">Update cart</a>
-
 </div>
 
 </body>

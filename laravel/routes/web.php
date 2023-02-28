@@ -29,9 +29,7 @@ Route::get('/shop',[ProductController::class,'view']);
 Route::get('/image-search',[ImageSearchController::class,'index']);
 Route::get('/voice-search',[VoiceSearchController::class,'index']);
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::get('/', [ProductController::class,'home_view'])->name('home');
 
 Route::get('/individual/{id}', [ProductController::class,'show']);
 Route::get('/cart/{id}', [ProductController::class,'show_cart']);

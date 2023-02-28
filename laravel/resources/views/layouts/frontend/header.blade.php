@@ -26,9 +26,8 @@
         </ul>
       </div>
       <div class="search">
-
-        <form class="example" action="/action_page.php" style="margin:auto;max-width:300px">
-          <input type="text" placeholder="Search.." name="search2">
+        <form class="example" action="" style="margin:auto;max-width:300px">
+          <input type="text" placeholder="Search.." name="search" value="{{ $search }}">
           <button type="submit"><i class="fa fa-search"></i></button>
         </form>
       </div>
