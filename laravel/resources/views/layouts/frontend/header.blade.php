@@ -40,7 +40,7 @@
           <li><a href="{{url('/shop')}}" class="under">SHOP</a></li>
 
           <li><a href="/login" class="under">Login</a></li>
-          <li><a href="/register" class="under">Register</a></li>
+          {{-- <li><a href="/register" class="under">Register</a></li> --}}
 
           <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
 

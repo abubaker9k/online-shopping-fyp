@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ShippingController;
 use App\Http\Controllers\ImageSearchController;
 use App\Http\Controllers\VoiceSearchController;
 use Illuminate\Support\Facades\Route;
@@ -30,7 +31,7 @@ Route::get('/voice-search',[VoiceSearchController::class,'index']);
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::get('/individual/{id}', [ProductController::class,'show']);
 Route::get('/cart/{id}', [ProductController::class,'show_cart']);
@@ -52,6 +53,12 @@ Route::get('/product', function () {
 })->middleware(['auth', 'verified'])->name('product_add');
 
 Route::post('/product', [ProductController::class,'store']);
+
+Route::get('/shipping-confirm', function () {
+    echo  'thanks for shopping';
+});
+
+Route::post('/shipping-confirm', [ShippingController::class,'store']);
 
 Route::get('/register', function () {
     return view('auth/register');

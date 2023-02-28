@@ -1,4 +1,4 @@
-
+{{--
 <h1> Add new product</h1>
 
 
@@ -30,11 +30,11 @@
     <input type="submit" value="Submit">
   </div>
 
-</form>
+</form> --}}
 
 
-{{-- <x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
+<x-guest-layout>
+    <form method="POST" action="{{ url('/') }}/product">
         @csrf
 
         <!-- Name -->
@@ -47,8 +47,8 @@
         <!-- Email Address -->
         <div class="mt-4">
             <x-input-label for="Category" :value="__('Category')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            <x-text-input id="category" class="block mt-1 w-full" type="text" name="category" :value="old('category')" required />
+            <x-input-error :messages="$errors->get('category')" class="mt-2" />
         </div>
 
         <div class="flex items-center justify-end mt-4">
@@ -57,4 +57,4 @@
             </x-primary-button>
         </div>
     </form>
-</x-guest-layout> --}}
+</x-guest-layout>

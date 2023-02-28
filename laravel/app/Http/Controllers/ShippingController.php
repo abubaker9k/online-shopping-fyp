@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Product;
+use App\Models\Shipping;
 
-class ProductController extends Controller
+class ShippingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('shop.shop');
+        //
     }
 
     /**
@@ -35,14 +35,13 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        // echo '<pre>';
-        // print_r($request->all());
-
-        $product = new Product;
-        $product-> product_name = $request['product_name'];
-        $product-> category = $request['category'];
-        $product->save();
-        return view('welcome');
+        $shipping = new Shipping;
+        $shipping-> name = $request['name'];
+        $shipping-> email = $request['email'];
+        $shipping-> address = $request['address'];
+        $shipping-> phone_number = $request['phone_number'];
+        $shipping->save();
+        return view('shop.confirm_shipping');
     }
 
     /**
@@ -53,18 +52,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        echo ' i am show from product controller';
-        $product = Product::find($id);
-        $data = compact('product');
-        return view('shop.individual')->with($data);
-    }
-
-    public function show_cart($id)
-    {
-
-        $product = Product::find($id);
-        $data = compact('product');
-        return view('shop.cart')->with($data);
+        //
     }
 
     /**
@@ -99,12 +87,5 @@ class ProductController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function view()
-    {
-        $product = Product::all();
-        $data = compact('product');
-        return view('shop.shop')->with($data);
     }
 }
