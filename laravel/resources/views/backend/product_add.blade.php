@@ -34,7 +34,7 @@
 
 
 <x-guest-layout>
-    <form method="POST" action="{{ url('/') }}/product">
+    <form method="POST" action="{{ url('/') }}/product" enctype="multipart/form-data">
         @csrf
 
         <!-- Name -->
@@ -50,6 +50,14 @@
             <x-text-input id="category" class="block mt-1 w-full" type="text" name="category" :value="old('category')" required />
             <x-input-error :messages="$errors->get('category')" class="mt-2" />
         </div>
+
+        {{-- image upload --}}
+        <div class="mt-4">
+            <x-input-label for="Image" :value="__('Image')" />
+            <x-text-input id="product_image" class="block mt-1 w-full" type="file" name="product_image" :value="old('product_image')" required />
+            <x-input-error :messages="$errors->get('product_image')" class="mt-2" />
+        </div>
+
 
         <div class="flex items-center justify-end mt-4">
                <x-primary-button class="ml-4">

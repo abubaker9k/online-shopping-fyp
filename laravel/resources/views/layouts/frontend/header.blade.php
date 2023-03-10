@@ -27,7 +27,7 @@
       </div>
       <div class="search">
         <form class="example" action="" style="margin:auto;max-width:300px">
-          <input type="text" placeholder="Search.." name="search" value="{{ $search }}">
+          {{-- <input type="text" placeholder="Search.." name="search" value="{{ $search }}"> --}}
           <button type="submit"><i class="fa fa-search"></i></button>
         </form>
       </div>

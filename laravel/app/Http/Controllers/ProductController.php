@@ -37,10 +37,22 @@ class ProductController extends Controller
     {
         // echo '<pre>';
         // print_r($request->all());
-
+        // die;
+        // echo $request->file('product_image')->store('uploads/products');
+        // die;
         $product = new Product;
         $product-> product_name = $request['product_name'];
         $product-> category = $request['category'];
+        $product-> product_image = $request->file('product_image')->store('uploads');
+        // $product->product_image = $request['product_image'];
+        // if ($request->hasfile('product_image')) {
+        //     $file = $request->file('product_image');
+        //     $extension = $file->getClientOriginalExtension();
+        //     $filename = time().'.'.$extension;
+        //     $file->move('uploads/products'.$filename);
+        //     $product-> product_image = $request['product_image'];
+        // }
+
         $product->save();
         return view('welcome');
     }

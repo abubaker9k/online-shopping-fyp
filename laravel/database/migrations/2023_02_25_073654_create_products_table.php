@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id("product_id");
             $table->string('product_name');
             $table->string('category');
+            $table->string('product_image')->default('null');
             $table->timestamps();
         });
     }

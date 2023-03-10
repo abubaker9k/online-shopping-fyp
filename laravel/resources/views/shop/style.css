@@ -6,6 +6,10 @@
     justify-content: center;
     margin: 10px auto;
   }
+  .maindiv{
+    display: grid;
+
+  }
   .section2 .container .items {
     margin: 10px;
     width: 200px;
