@@ -25,6 +25,11 @@ use App\Models\Product;
 //     print_r($product);
 // });
 
+Route::get('/onnx_model', function () {
+    require_once 'C:\xampp\htdocs\integeration\onnx_model.php';
+});
+
+
 Route::get('/shop',[ProductController::class,'view']);
 Route::get('/image-search',[ImageSearchController::class,'index']);
 Route::get('/voice-search',[VoiceSearchController::class,'index']);
