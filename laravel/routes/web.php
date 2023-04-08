@@ -5,6 +5,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShippingController;
 use App\Http\Controllers\ImageSearchController;
 use App\Http\Controllers\VoiceSearchController;
+use App\Http\Controllers\VisualController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Product;
 
@@ -73,4 +74,5 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::post('/visual-search', [VisualController::class,'search']);
 require __DIR__.'/auth.php';
