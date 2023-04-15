@@ -34,28 +34,49 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        // echo '<pre>';
-        // print_r($request->all());
-        // die;
-        // echo $request->file('product_image')->store('uploads/products');
-        // die;
-        $product = new Product;
-        $product-> product_name = $request['product_name'];
-        $product-> category = $request['category'];
-        $product-> product_image = $request->file('product_image')->store('uploads');
-        // $product->product_image = $request['product_image'];
-        // if ($request->hasfile('product_image')) {
-        //     $file = $request->file('product_image');
-        //     $extension = $file->getClientOriginalExtension();
-        //     $filename = time().'.'.$extension;
-        //     $file->move('uploads/products'.$filename);
-        //     $product-> product_image = $request['product_image'];
-        // }
+{
+    $product = new Product;
+    $product->product_name = $request->input('product_name');
+    $product->category = $request->input('category');
 
-        $product->save();
-        return view('welcome');
+    // Store product image
+    if ($request->hasFile('product_image')) {
+        $product->product_image = $request->file('product_image')->store('uploads', 'public');
     }
+
+    // Store product video
+    if ($request->hasFile('product_video')) {
+        $product->product_video = $request->file('product_video')->store('uploads', 'public');
+    }
+
+    // Store product 3D model
+    // Store product 3D model
+    if ($request->hasFile('product_model')) {
+        $path = $request->file('product_model')->store('uploads', 'public');
+        $product->product_model = $path;
+    }
+
+    // if ($request->hasFile('product_model')) {
+    //     $product->product_3d_model = $request->file('product_model')->store('uploads', 'public');
+    // }
+
+    $product->save();
+    return view('welcome');
+}
+
+
+
+    // public function store(Request $request)
+    // {
+
+    //     $product = new Product;
+    //     $product-> product_name = $request['product_name'];
+    //     $product-> category = $request['category'];
+    //     $product->product_image = $request->file('product_image')->store('uploads', 'public');
+
+    //     $product->save();
+    //     return view('welcome');
+    // }
 
     /**
      * Display the specified resource.
@@ -65,7 +86,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        echo ' i am show from product controller';
+
         $product = Product::find($id);
         $data = compact('product');
         return view('shop.individual')->with($data);
@@ -139,5 +160,18 @@ class ProductController extends Controller
 
         $data = compact('product','search');
         return view('welcome')->with($data);
+    }
+    public function store3d(Request $request)
+    {
+        $product = new Product;
+
+        // Store product 3D model
+        if ($request->hasFile('product_model')) {
+            $path = $request->file('product_model')->store('uploads', 'public');
+            $product->product_model = $path;
+        }
+
+        $product->save();
+        return view('welcome');
     }
 }

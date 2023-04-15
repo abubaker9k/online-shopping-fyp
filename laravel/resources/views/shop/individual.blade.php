@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <link rel="stylesheet" href="style.css">
     <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,8 +12,20 @@
 
 <body>
 <main class="container">
-
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
   <!-- Left Column / Headphones Image -->
+
+  {{-- <div class="left-column swiper-container">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><img data-image="black" src="{{ asset('img/red.png') }}" alt=""></div>
+      <div class="swiper-slide"><img data-image="blue" src="{{ asset('img/blue.png') }}" alt=""></div>
+      <<div class="swiper-slide"><img data-image="red" class="active" src="{{ asset('img/black.png') }}" alt=""></div>
+    </div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  </div> --}}
+
+
   <div class="left-column">
     <img data-image="black" src="{{ asset('img/black.png') }}" alt="">
     <img data-image="blue" src="{{ asset('img/blue.png') }}" alt="">

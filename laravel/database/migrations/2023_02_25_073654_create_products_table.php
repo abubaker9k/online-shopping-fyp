@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('product_name');
             $table->string('category');
             $table->string('product_image')->default('null');
+            $table->string('product_video')->default('null');
+            $table->string('product_model')->default('null');
             $table->timestamps();
         });
     }

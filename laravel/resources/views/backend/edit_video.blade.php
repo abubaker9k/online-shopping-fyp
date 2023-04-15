@@ -15,12 +15,7 @@
         <x-input-error :messages="$errors->get('category')" class="mt-2" />
     </div>
 
-    {{-- Image upload --}}
-    <div class="mt-4">
-        <x-input-label for="Image" :value="__('Image')" />
-        <x-text-input id="product_image" class="block mt-1 w-full" type="file" name="product_image" :value="old('product_image')" required />
-        <x-input-error :messages="$errors->get('product_image')" class="mt-2" />
-    </div>
+
 
     {{-- Video upload --}}
     <div class="mt-4">
@@ -29,12 +24,6 @@
         <x-input-error :messages="$errors->get('product_video')" class="mt-2" />
     </div>
 
-    {{-- 3D model upload --}}
-    <div class="mt-4">
-        <x-input-label for="Model" :value="__('Model')" />
-        <x-text-input id="product_model" class="block mt-1 w-full" type="file" name="product_model" :value="old('product_model')" required />
-        <x-input-error :messages="$errors->get('product_model')" class="mt-2" />
-    </div>
 
     <div class="flex items-center justify-end mt-4">
         <x-primary-button class="ml-4">
