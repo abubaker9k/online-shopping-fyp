@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -33,35 +33,48 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+
+
+public function store(Request $request)
 {
+    $validatedData = $request->validate([
+        'product_name' => 'required',
+        'category' => 'required',
+        'product_image' => 'nullable|image',
+        'product_video' => 'nullable|mimes:mp4',
+        'product_model' => 'required',
+    ]);
+
     $product = new Product;
     $product->product_name = $request->input('product_name');
     $product->category = $request->input('category');
 
-    // Store product image
     if ($request->hasFile('product_image')) {
         $product->product_image = $request->file('product_image')->store('uploads', 'public');
     }
 
-    // Store product video
     if ($request->hasFile('product_video')) {
         $product->product_video = $request->file('product_video')->store('uploads', 'public');
     }
 
-    // Store product 3D model
-    // Store product 3D model
     if ($request->hasFile('product_model')) {
-        $path = $request->file('product_model')->store('uploads', 'public');
-        $product->product_model = $path;
+        $file = $request->file('product_model');
+        $extension = $file->getClientOriginalExtension();
+        $allowedExtensions = ['gltf', 'glb', 'obj', 'fbx'];
+
+        if (!in_array($extension, $allowedExtensions)) {
+            return back()->withErrors(['product_model' => 'Invalid file format. Allowed formats are gltf, glb, obj, and fbx.']);
+        }
+
+        // Proceed with the file upload
+        $storedFilePath = $file->storePublicly('models', 'public');
+        $product->product_model = $storedFilePath;
+    } else {
+        return back()->withErrors(['product_model' => 'No file provided.']);
     }
 
-    // if ($request->hasFile('product_model')) {
-    //     $product->product_3d_model = $request->file('product_model')->store('uploads', 'public');
-    // }
-
     $product->save();
-    return view('welcome');
+    return view('dashboard');
 }
 
 
@@ -136,12 +149,13 @@ class ProductController extends Controller
 
     public function view(Request $request)
     {
+        // $pagination = Product::paginate(10);
         $search = $request['search'] ?? '';
         if ($search != '' ) {
-            $product = Product::where('product_name','LIKE',"%$search%")->orWHERE('category','LIKE',"%$search%")->get();
+            $product = Product::where('product_name','LIKE',"%$search%")->orWHERE('category','LIKE',"%$search%")->paginate(9);
         }
         else {
-            $product = Product::all();
+            $product = Product::paginate(9);
         }
 
         $data = compact('product','search');
@@ -158,20 +172,24 @@ class ProductController extends Controller
             $product = Product::all();
         }
 
-        $data = compact('product','search');
-        return view('welcome')->with($data);
+        $products = DB::table('products')
+                ->orderBy('product_id', 'desc')
+                ->take(3)
+                ->get();
+        $trending_products = DB::table('products')
+                ->orderBy('product_id', 'asc')
+                ->take(3)
+                ->get();
+                $data = compact('product','search','products','trending_products');
+                return view('welcome')->with($data);
     }
-    public function store3d(Request $request)
-    {
-        $product = new Product;
+    // public function showModel(Product $product)
+    // {
+    //     return view('show_model', ['model' => $product]);
+    // }\
+    public function showModel()
+{
+    return view('show_model');
+}
 
-        // Store product 3D model
-        if ($request->hasFile('product_model')) {
-            $path = $request->file('product_model')->store('uploads', 'public');
-            $product->product_model = $path;
-        }
-
-        $product->save();
-        return view('welcome');
-    }
 }

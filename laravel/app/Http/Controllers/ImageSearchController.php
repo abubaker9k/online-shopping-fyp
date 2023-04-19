@@ -81,4 +81,12 @@ class ImageSearchController extends Controller
     {
         //
     }
+    public function getFlaskData()
+{
+    $client = new Client();
+    $response = $client->get('https://your-flask-app-url.com/api/data');
+    $data = json_decode($response->getBody(), true);
+
+    return view('your-view', ['data' => $data]);
+}
 }

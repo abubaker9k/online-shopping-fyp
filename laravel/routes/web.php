@@ -5,6 +5,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShippingController;
 use App\Http\Controllers\ImageSearchController;
 use App\Http\Controllers\VoiceSearchController;
+use App\Http\Controllers\VideoController;
 use App\Http\Controllers\VisualController;
 use App\Http\Controllers\BotManChatController;
 use Illuminate\Support\Facades\Route;
@@ -31,7 +32,18 @@ use App\Models\Product;
 Route::get('/', [ProductController::class,'home_view'])->name('home');
 
 
+//shop page
 Route::get('/shop',[ProductController::class,'view']);
+
+
+Route::get('/show-model/', [ProductController::class, 'showModel'])->name('show_model');
+
+
+Route::get('/speed_form', function () {
+    return view('speed_form');
+});
+Route::post('/process-video', [VideoController::class, 'processVideo']);
+
 Route::get('/image-search',[ImageSearchController::class,'index']);
 Route::get('/voice-search',[VoiceSearchController::class,'index']);
 
@@ -82,10 +94,7 @@ Route::middleware('auth')->group(function () {
 
 Route::post('/visual-search', [VisualController::class,'search']);
 
-Route::get('/botman', function () {
-    return view('botman');
-});
-Route::post('/botman/chat', 'BotManController@handle');
+
 
 
 

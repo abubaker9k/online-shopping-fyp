@@ -1,8 +1,8 @@
 <footer>
     <div id="footer" class="footer0">
-      <h1>CODEWITHRANDOM</h1>
+      <h1>CODE WITH RANDOM</h1>
     </div>
-    <div class="footer1 ">
+    {{-- <div class="footer1 ">
       Connect with us at<div class="social-media">
         <a href="#">
           <ion-icon name="logo-facebook"></ion-icon>
@@ -20,8 +20,8 @@
           <ion-icon name="logo-twitter"></ion-icon>
         </a>
       </div>
-    </div>
-    <div class="footer2">
+    </div> --}}
+    {{-- <div class="footer2">
       <div class="product">
         <div class="heading">Products</div>
         <div class="div">Sell your Products</div>
@@ -51,8 +51,8 @@
         <div class="div">Terms</div>
         <div class="div">Login</div>
       </div>
-    </div>
-    <div class="footer3">Copyright © <h4>ShoPperZ</h4> 2021-2028</div>
+    </div> --}}
+    <div class="footer3">Copyright © <h4>Partners</h4> 2021-2024</div>
   </footer>
 
 </body>

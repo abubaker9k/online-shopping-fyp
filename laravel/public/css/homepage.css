@@ -3,6 +3,96 @@
     padding: 0;
     box-sizing: border-box;
   }
+
+  .search {
+    display: flex;
+    position: relative;
+  }
+/* background image */
+  .hero {
+    background-image:  url("/img/home/blue.png");;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    opacity: 0.6;
+
+  }
+
+  .hero-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: black;
+
+  }
+
+  .hero-text h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .hero-text p {
+    font-size: 1.5rem;
+  }
+
+  /* container after image */
+  .outer-container-after_banner_image{
+    background-color: #111111;
+    width: 100%;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .container-home {
+    display: flex;
+
+  }
+
+  .rectangle {
+    height: 50px;
+    flex-grow: 1;
+    flex-basis: 0;
+    margin: 5px;
+  }
+
+  .rectangle1 {
+    width: 200px;
+    height: 100px;
+    flex-grow: 1;
+    flex-basis: 0;
+    margin: 10px;
+    padding: 10px;
+    background-color: gray;
+  }
+
+  .rectangle2 {
+    background-color: green;
+  }
+
+  .rectangle3 {
+    background-color: blue;
+  }
+
+  .rectangle4 {
+    background-color: yellow;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   html {
     scroll-behavior: smooth;
   }
@@ -18,6 +108,7 @@
   .heading ul {
     display: flex;
   }
+
   .logo a {
     color: white;
     transition-duration: 1s;
@@ -86,9 +177,7 @@
   ion-icon:hover {
     cursor: pointer;
   }
-  .search a {
-    display: flex;
-  }
+
   header a ion-icon {
     position: relative;
     right: 3px;
@@ -151,10 +240,7 @@
   .heading1 {
     opacity: 0;
   }
-  .search {
-    display: flex;
-    position: relative;
-  }
+
   .section1 {
     width: 1080px;
     overflow: hidden;
@@ -186,7 +272,7 @@
   }
   .section2 .container .items .name {
     text-align: center;
-    background-color: rgb(240, 197, 6);
+    background-color: rgb(0, 0, 0);
     height: 25px;
     padding-top: 4px;
     color: white;
@@ -197,13 +283,14 @@
     padding-left: 10px;
     display: block;
     width: 100%;
-    color: rgb(255, 0, 0);
+    color: rgb(0, 0, 0);
     font-weight: 650;
   }
   .section2 .container .items .info {
     padding-left: 10px;
-    color: rgb(243, 168, 7);
+    color: rgb(0, 0, 0);
   }
+
   .section2 .container .items .img img {
     width: 320px;
     height: 200px;
@@ -440,10 +527,7 @@
       position: relative;
       bottom: 8px;
     }
-    .search a {
-      display: flex;
-      flex-wrap: nowrap;
-    }
+
 
     .heading1 .ham {
       background-color: black;
@@ -480,10 +564,6 @@
       z-index: 34;
     }
 
-    .search a {
-      display: flex;
-      flex-wrap: nowrap;
-    }
   }
   body {
   font-family: Arial;

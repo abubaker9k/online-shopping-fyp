@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-app-layout>
     <form method="POST" action="{{ url('/') }}/product" enctype="multipart/form-data">
         @csrf
     <!-- Name -->
@@ -43,7 +43,7 @@
     </div>
 </form>
 
-</x-guest-layout>
+</x-app-layout>
 
 
 
