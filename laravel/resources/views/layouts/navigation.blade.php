@@ -29,7 +29,7 @@
                     {{ __('Edit Video') }}
                 </x-nav-link>
 
-                    <x-nav-link :href="route('edit_video')">
+                    <x-nav-link :href="route('edit_3dmodel')">
                         {{ __('Edit 3Dmodel') }}
                     </x-nav-link>
                 </div>

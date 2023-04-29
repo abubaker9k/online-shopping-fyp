@@ -6,6 +6,7 @@ use App\Http\Controllers\ShippingController;
 use App\Http\Controllers\ImageSearchController;
 use App\Http\Controllers\VoiceSearchController;
 use App\Http\Controllers\VideoController;
+use App\Http\Controllers\blendermodelController;
 use App\Http\Controllers\VisualController;
 use App\Http\Controllers\BotManChatController;
 use Illuminate\Support\Facades\Route;
@@ -71,6 +72,13 @@ Route::get('/product', function () {
 Route::get('/edit_video', function () {
     return view('backend/edit_video');
 })->middleware(['auth', 'verified'])->name('edit_video');
+
+Route::get('/edit_3dmodel', function () {
+    return view('backend/edit_3dmodel');
+})->middleware(['auth', 'verified'])->name('edit_3dmodel');
+
+Route::post('/process', [blendermodelController::class,'process'] )->name('process');
+
 
 Route::post('/product', [ProductController::class,'store']);
 
