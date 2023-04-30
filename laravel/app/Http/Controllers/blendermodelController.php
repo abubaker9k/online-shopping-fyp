@@ -60,22 +60,22 @@ if ($return_var === 0) {
 } else {
     echo "Command failed with return value: {$return_var}";
 }
+
+
+
+        $command = "{$blenderPath} --background --python {$pythonScript} -- {$modelPath} {$outputPath}\\{$outputName} {$colorPath}";
+
+        exec($command);
+
+        return redirect()->route('edit_3dmodel')
+    ->with('success', 'Validation successful')
+    ->with('modelPath', $modelPath)
+    ->with('colorPath', $colorPath)
+    ->with('blenderPath', $blenderPath)
+    ->with('outputName', $outputName)
+    ->with('command', $command);
+
     }
-
-
-        // $command = "{$blenderPath} --background --python {$pythonScript} -- {$modelPath} {$outputPath}\\{$outputName} {$colorPath}";
-
-        // exec($command);
-
-    //     return redirect()->route('edit_3dmodel')
-    // ->with('success', 'Validation successful')
-    // ->with('modelPath', $modelPath)
-    // ->with('colorPath', $colorPath)
-    // ->with('blenderPath', $blenderPath)
-    // ->with('outputName', $outputName)
-    // ->with('command', $command);
-
-
         // // Delete the temporary files
         // Storage::delete([$modelPath, $colorPath]);
 
