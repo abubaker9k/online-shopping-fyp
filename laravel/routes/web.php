@@ -23,11 +23,7 @@ use App\Models\Product;
 |
 */
 
-// Route::get('/product-test',  function(){
-//     $product = Product::all();
-//     echo "<pre>";
-//     print_r($product);
-// });
+
 
 //home page
 Route::get('/', [ProductController::class,'home_view'])->name('home');
@@ -102,7 +98,9 @@ Route::middleware('auth')->group(function () {
 
 Route::post('/visual-search', [VisualController::class,'search']);
 
+Route::get('/transcription', [VoiceSearchController::class, 'showTranscription']);
 
+Route::post('/transcription', [VoiceSearchController::class, 'transcribeAudio']);
 
 
 
