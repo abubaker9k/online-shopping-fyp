@@ -39,10 +39,10 @@ Route::get('/show-model/', [ProductController::class, 'showModel'])->name('show_
 Route::get('/speed_form', function () {
     return view('speed_form');
 });
-Route::post('/process-video', [VideoController::class, 'processVideo']);
+
 
 Route::get('/image-search',[ImageSearchController::class,'index']);
-Route::get('/voice-search',[VoiceSearchController::class,'index']);
+
 
 
 
@@ -73,7 +73,7 @@ Route::get('/edit_3dmodel', function () {
     return view('backend/edit_3dmodel');
 })->middleware(['auth', 'verified'])->name('edit_3dmodel');
 
-Route::post('/process', [blendermodelController::class,'process'] )->name('process');
+
 
 
 Route::post('/product', [ProductController::class,'store']);
@@ -98,10 +98,21 @@ Route::middleware('auth')->group(function () {
 
 Route::post('/visual-search', [VisualController::class,'search']);
 
+
+
+Route::post('/process', [blendermodelController::class,'process'] )->name('process');
+
+Route::post('/process-video', [VideoController::class, 'processVideo'])->name('process');
+
+Route::get('/process-video', function () {
+    return view('process_video');
+});
+
+Route::get('/run-python', [VideoController::class, 'runPythonScript']);
+
+Route::get('/voice-search',[VoiceSearchController::class,'index']);
 Route::get('/transcription', [VoiceSearchController::class, 'showTranscription']);
 
 Route::post('/transcription', [VoiceSearchController::class, 'transcribeAudio']);
-
-
 
 require __DIR__.'/auth.php';

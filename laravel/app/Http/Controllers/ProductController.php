@@ -152,10 +152,10 @@ public function store(Request $request)
         // $pagination = Product::paginate(10);
         $search = $request['search'] ?? '';
         if ($search != '' ) {
-            $product = Product::where('product_name','LIKE',"%$search%")->orWHERE('category','LIKE',"%$search%")->paginate(9);
+            $product = Product::where('product_name','LIKE',"%$search%")->orWHERE('category','LIKE',"%$search%")->paginate(21);
         }
         else {
-            $product = Product::paginate(9);
+            $product = Product::paginate(21);
         }
 
         $data = compact('product','search');

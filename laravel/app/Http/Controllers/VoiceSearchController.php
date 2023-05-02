@@ -83,36 +83,70 @@ class VoiceSearchController extends Controller
         //
     }
     public function transcribeAudio(Request $request)
+{
+    $audioData = $request->input('audio');
+    $audioContents = base64_decode(preg_replace('#^data:audio/\w+;base64,#i', '', $audioData));
+    $apiKey = '4efa68d445b6312768f031147f70b272593c917d';
+
+    $client = new Client([
+        'verify' => storage_path('app/cacert.pem'),
+        'timeout' => 30000,
+        'connect_timeout' => 30000,
+    ]);
+    $response = $client->post('https://api.deepgram.com/v1/listen', [
+        'headers' => [
+            'Authorization' => 'Token ' . $apiKey,
+            'Content-Type' => 'audio/wav',
+        ],
+        'timeout' => 60,
+        'connect_timeout' => 60,
+        'body' => $audioContents,
+    ]);
+
+    $transcription = json_decode($response->getBody(), true)['results']['channels'][0]['alternatives'][0]['transcript'];
+
+    $request->session()->put('transcription', $transcription);
+    return redirect('/transcription');
+}
+
+    // public function transcribeAudio(Request $request)
+    // {
+    //     $audioPath = $request->file('audio')->path();
+    //     $apiKey = '4efa68d445b6312768f031147f70b272593c917d';
+
+    //     $client = new Client([
+    //         'verify' => storage_path('app/cacert.pem'),
+    //         'timeout' => 30000, // Increase the timeout value (in seconds)
+    //         'connect_timeout' => 30000, // Increase the connection timeout value (in seconds)
+    //     ]);
+    //     $response = $client->post('https://api.deepgram.com/v1/listen', [
+    //         'headers' => [
+    //             'Authorization' => 'Token ' . $apiKey,
+    //             'Content-Type' => 'audio/wav',
+    //         ],
+    //         'timeout' => 60, // Increase the timeout value (in seconds)
+    //         'connect_timeout' => 60, // Increase the connection timeout value (in seconds)
+    //         'body' => fopen($audioPath, 'r'),
+    //     ]);
+
+    //     $transcription = json_decode($response->getBody(), true)['results']['channels'][0]['alternatives'][0]['transcript'];
+
+    //     // Return the transcription as JSON
+    //     return response()->json(['transcription' => $transcription]);
+    // }
+
+    public function showTranscription(Request $request)
     {
-        $audioPath = $request->file('audio')->path();
-        $apiKey = '4efa68d445b6312768f031147f70b272593c917d';
+        $transcription = $request->session()->get('transcription', '');
 
-        $client = new Client([
-            'verify' => storage_path('app/cacert.pem'),
-            'timeout' => 30000, // Increase the timeout value (in seconds)
-            'connect_timeout' => 30000, // Increase the connection timeout value (in seconds)
-        ]);
-        $response = $client->post('https://api.deepgram.com/v1/listen', [
-            'headers' => [
-                'Authorization' => 'Token ' . $apiKey,
-                'Content-Type' => 'audio/wav',
-            ],
-            'timeout' => 60, // Increase the timeout value (in seconds)
-            'connect_timeout' => 60, // Increase the connection timeout value (in seconds)
-            'body' => fopen($audioPath, 'r'),
-        ]);
-
-        $transcription = json_decode($response->getBody(), true)['results']['channels'][0]['alternatives'][0]['transcript'];
-
-        // Return the transcription as JSON
-        return response()->json(['transcription' => $transcription]);
+        return view('voice.transcription', compact('transcription'));
     }
 
 
-    public function showTranscription(Request $request)
-{
-    $transcription = $request->session()->get('transcription', '');
+//     public function showTranscription(Request $request)
+// {
+//     $transcription = $request->session()->get('transcription', '');
 
-    return view('voice.transcription', ['transcription' => $transcription]);
-}
+//     return view('voice.transcription', ['transcription' => $transcription]);
+// }
 }

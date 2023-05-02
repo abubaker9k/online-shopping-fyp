@@ -1,5 +1,42 @@
 <x-app-layout>
-    <form method="POST" action="http://127.0.0.1:5000/" enctype="multipart/form-data">
+
+    <form action="{{ url('/process-video') }}" method="post" enctype="multipart/form-data">
+        @csrf
+        <!-- Video paths -->
+        <label for="video1">Video 1:</label>
+        <input type="file" name="video1" id="video1" required>
+        <br>
+        <label for="video2">Video 2:</label>
+        <input type="file" name="video2" id="video2" required>
+        <br>
+        <!-- User text -->
+        <label for="user_text">User Text:</label>
+        <input type="text" name="user_text" id="user_text">
+        <br>
+        <!-- User crop values -->
+        <label for="user_crop_values[]">Crop Values (x1, y1, x2, y2):</label>
+        <input type="number" name="user_crop_values[]" id="user_crop_values[]" min="0" step="1" required>
+        <input type="number" name="user_crop_values[]" id="user_crop_values[]" min="0" step="1" required>
+        <input type="number" name="user_crop_values[]" id="user_crop_values[]" min="0" step="1" required>
+        <input type="number" name="user_crop_values[]" id="user_crop_values[]" min="0" step="1" required>
+        <br>
+        <!-- User speed -->
+        <label for="user_speed">Speed:</label>
+        <input type="number" name="user_speed" id="user_speed" min="0.1" step="0.1" required>
+        <br>
+        <!-- User audio clip -->
+        <label for="user_audio_clip">Audio Clip:</label>
+        <input type="file" name="user_audio_clip" id="user_audio_clip">
+        <br>
+        <input type="submit" value="Process Video">
+    </form>
+
+
+
+
+
+    {{-- #flask code --}}
+    {{-- <form method="POST" action="http://127.0.0.1:5000/" enctype="multipart/form-data">
         @csrf
         <!-- Name -->
         <div>
@@ -9,7 +46,7 @@
         </div>
 
         {{-- Video upload --}}
-        <div class="mt-4">
+        {{-- <div class="mt-4">
             <x-input-label for="Video" :value="__('Video')" />
             <x-text-input id="product_video" class="block mt-1 w-full" type="file" name="file" :value="old('product_video')" required />
             <x-input-error :messages="$errors->get('product_video')" class="mt-2" />
@@ -27,7 +64,7 @@
     <video controls>
         <source src="{{ $video_url }}" type="video/mp4">
     </video>
-    @endif
+    @endif --}}
 
 </x-app-layout>
 

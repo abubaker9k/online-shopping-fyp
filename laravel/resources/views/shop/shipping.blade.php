@@ -1,10 +1,11 @@
-<h1>Shipping Form </h1>
+
 <x-guest-layout>
 
     <form method="POST" action="{{ url('/') }}/shipping-confirm">
         @csrf
 
         <!-- Name -->
+        <h1>   Shipping Form   </h1>
         <div>
             <x-input-label for="name" :value="__('Name')" />
             <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
