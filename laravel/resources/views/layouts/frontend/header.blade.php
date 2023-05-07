@@ -24,7 +24,7 @@
 
   <body>
     <header>
-      <div class="logo"><a href="{{url('/')}}">CWR Shop</a></div>
+      <div class="logo"><a href="{{url('/')}}">Modern Ecommerce </a></div>
       <div class="menu">
         <a href="#">
           <ion-icon name="close" class="close"></ion-icon>
