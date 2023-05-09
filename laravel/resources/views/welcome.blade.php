@@ -3,6 +3,8 @@
 @section('main-section')
     <section>
       <div class="section">
+
+
         <section class="hero">
             <div class="hero-text">
               <h1>3D Ecommerce Store</h1>
@@ -11,8 +13,8 @@
           </section>
           <div class="outer-container-after_banner_image">
           <div class="container-home">
-          <div class="rectangle rectangle1">
-            <h1>3D view</h1>
+          <div class="rectangle rectangle1 view3D" >
+                <h1>3D view</h1>
         </div>
           <div class="rectangle rectangle1">
             <h1>Automated Video Editor</h1>
@@ -25,10 +27,11 @@
           </div>
         </div>
     </div>
+    <i class="fa-solid fa-cart-shopping"></i>
         <div id="section2" class="section2">
-
+            <h1 class = 'top-product'>Top Products</h1>
           <div class="container">
-            <h1>Top Products</h1>
+
             @foreach ($products as $product)
             <div class="items">
 
@@ -42,8 +45,9 @@
             @endforeach
 
             <div id="section2" class="section2">
-              <div class="container">
                 <h1>Best Selling Products</h1>
+              <div class="container">
+
                 @foreach ($trending_products as $product)
                 <div class="items">
 
@@ -63,10 +67,3 @@
 
 @endsection
 
-{{-- @foreach ($products as $product)
-            <div class="product">
-              <h2>{{ $product->product_name }}</h2>
-              <p>{{ $product->category }}</p>
-              <img src="{{ asset('storage/'.$product->product_image) }}" alt="{{ $product->product_name }}">
-            </div>
-            @endforeach --}}

@@ -9,6 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ asset('css/homepage.css') }} ">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
     <style>
       /* Add these rules to remove the space around the search form and icon */
       .search {
@@ -42,10 +44,8 @@
       </div>
       <div class="heading">
         <ul>
-
-
-
-          <li><a href= "{{url('/')}}" class="under">HOME</a></li>
+            <div>
+          <li><a href= "{{url('/')}}" class="">HOME</a></li></div>
           <li><a href="{{url('/shop')}}" class="under">SHOP</a></li>
 
           @if (auth()->check())

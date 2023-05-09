@@ -115,4 +115,8 @@ Route::get('/transcription', [VoiceSearchController::class, 'showTranscription']
 
 Route::post('/transcription', [VoiceSearchController::class, 'transcribeAudio']);
 
+Route::get('/test',function () {
+    return view('test');
+});
+
 require __DIR__.'/auth.php';

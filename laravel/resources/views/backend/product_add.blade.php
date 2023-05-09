@@ -1,4 +1,8 @@
 <x-app-layout>
+    <div class="form-styling">
+    <div>
+
+
     <form method="POST" action="{{ url('/') }}/product" enctype="multipart/form-data">
         @csrf
     <!-- Name -->
@@ -42,7 +46,8 @@
         </x-primary-button>
     </div>
 </form>
-
+</div>
+</div>
 </x-app-layout>
 
 

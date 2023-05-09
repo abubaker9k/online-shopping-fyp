@@ -26,10 +26,16 @@
   </div> --}}
 
 
-  <div class="left-column">
-    <img data-image="black" src="{{ asset('img/black.png') }}" alt="">
-    <img data-image="blue" src="{{ asset('img/blue.png') }}" alt="">
-    <img data-image="red" class="active" src="{{ asset('img/red.png') }}" alt="">
+  <div class="column-container">
+    <div class="left-column">
+      <img data-image="red" class="active" src="{{ asset('img/red.png') }}" alt="">
+    </div>
+    <div class="left-column">
+      <img data-image="red" class="active" src="{{ asset('img/red.png') }}" alt="">
+    </div>
+    <div class="left-column">
+      <img data-image="red" class="active" src="{{ asset('img/red.png') }}" alt="">
+    </div>
   </div>
 
 
