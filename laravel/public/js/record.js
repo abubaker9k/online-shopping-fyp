@@ -1,99 +1,99 @@
-async function submitForm(event) {
-    event.preventDefault();
-
-    const formData = new FormData();
-    formData.append('audio', hiddenFileInput.customFiles[0]);
-
-    try {
-      const response = await fetch('/transcription', {
-        method: 'POST',
-        body: formData,
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        console.log('Transcription:', data.transcription);
-
-        // Update the transcriptionResult element with the transcription
-        const transcriptionResult = document.getElementById('transcriptionResult');
-        if (transcriptionResult) {
-          transcriptionResult.textContent = data.transcription;
-        }
-      } else {
-        console.error('Error submitting the form:', response.statusText);
-      }
-    } catch (error) {
-      console.error('Error submitting the form:', error);
-    }
-  }
-
-
-
-
-
-
-
-
-
-
-// const startRecordingBtn = document.getElementById("startRecording");
-// const stopRecordingBtn = document.getElementById("stopRecording");
-// const submitBtn = document.getElementById("submit");
-// const audioPlayer = document.getElementById("audioPlayer");
-// const audioFileInput = document.getElementById("audioFile");
-// const form = document.querySelector('form');
-
-// let mediaRecorder;
-
-// startRecordingBtn.addEventListener("click", startRecording);
-// stopRecordingBtn.addEventListener("click", stopRecording);
-// form.addEventListener("submit", submitForm);
-
-// async function startRecording() {
-//   const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-//   mediaRecorder = RecordRTC(stream, { type: 'audio', mimeType: 'audio/wav' });
-
-//   mediaRecorder.startRecording();
-//   startRecordingBtn.disabled = true;
-//   stopRecordingBtn.disabled = false;
-// }
-
-// function stopRecording() {
-//   if (mediaRecorder) {
-//     mediaRecorder.stopRecording(() => {
-//       const blob = mediaRecorder.getBlob();
-//       const url = URL.createObjectURL(blob);
-//       audioPlayer.src = url;
-//       audioFileInput.files = new FileList([new File([blob], "audio.wav", { type: "audio/wav" })]);
-//       submitBtn.disabled = false;
-
-//       startRecordingBtn.disabled = false;
-//       stopRecordingBtn.disabled = true;
-//     });
-//   }
-// }
-
 // async function submitForm(event) {
-//   event.preventDefault();
+//     event.preventDefault();
 
-//   const formData = new FormData(form);
-//   try {
-//     const response = await fetch('/transcription', {
-//       method: 'POST',
-//       body: formData,
-//     });
+//     const formData = new FormData();
+//     formData.append('audio', hiddenFileInput.customFiles[0]);
 
-//     if (response.ok) {
-//       const data = await response.json();
-//       console.log('Transcription:', data.transcription);
-//       // Do something with the transcription
-//     } else {
-//       console.error('Error submitting the form:', response.statusText);
+//     try {
+//       const response = await fetch('/transcription', {
+//         method: 'POST',
+//         body: formData,
+//       });
+
+//       if (response.ok) {
+//         const data = await response.json();
+//         console.log('Transcription:', data.transcription);
+
+//         // Update the transcriptionResult element with the transcription
+//         const transcriptionResult = document.getElementById('transcriptionResult');
+//         if (transcriptionResult) {
+//           transcriptionResult.textContent = data.transcription;
+//         }
+//       } else {
+//         console.error('Error submitting the form:', response.statusText);
+//       }
+//     } catch (error) {
+//       console.error('Error submitting the form:', error);
 //     }
-//   } catch (error) {
-//     console.error('Error submitting the form:', error);
 //   }
-// }
+
+
+
+
+
+
+
+
+
+
+const startRecordingBtn = document.getElementById("startRecording");
+const stopRecordingBtn = document.getElementById("stopRecording");
+const submitBtn = document.getElementById("submit");
+const audioPlayer = document.getElementById("audioPlayer");
+const audioFileInput = document.getElementById("audioFile");
+const form = document.querySelector('form');
+
+let mediaRecorder;
+
+startRecordingBtn.addEventListener("click", startRecording);
+stopRecordingBtn.addEventListener("click", stopRecording);
+form.addEventListener("submit", submitForm);
+
+async function startRecording() {
+  const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+  mediaRecorder = RecordRTC(stream, { type: 'audio', mimeType: 'audio/wav' });
+
+  mediaRecorder.startRecording();
+  startRecordingBtn.disabled = true;
+  stopRecordingBtn.disabled = false;
+}
+
+function stopRecording() {
+  if (mediaRecorder) {
+    mediaRecorder.stopRecording(() => {
+      const blob = mediaRecorder.getBlob();
+      const url = URL.createObjectURL(blob);
+      audioPlayer.src = url;
+      audioFileInput.files = new FileList([new File([blob], "audio.wav", { type: "audio/wav" })]);
+      submitBtn.disabled = false;
+
+      startRecordingBtn.disabled = false;
+      stopRecordingBtn.disabled = true;
+    });
+  }
+}
+
+async function submitForm(event) {
+  event.preventDefault();
+
+  const formData = new FormData(form);
+  try {
+    const response = await fetch('/transcription', {
+      method: 'POST',
+      body: formData,
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      console.log('Transcription:', data.transcription);
+      // Do something with the transcription
+    } else {
+      console.error('Error submitting the form:', response.statusText);
+    }
+  } catch (error) {
+    console.error('Error submitting the form:', error);
+  }
+}
 
 
 

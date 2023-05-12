@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Record Audio</title>
-</head>
-<body>
+@extends('layouts.frontend.main')
+
+@section('main-section')
+
     <h1>Record Audio</h1>
     <button id="recordButton">Start Recording</button>
     <button id="stopButton" disabled>Stop Recording</button>
@@ -62,48 +60,4 @@
         stopButton.addEventListener('click', stopRecording);
     </script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-</body>
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
-{{--
-  <button id="startRecording">Start Recording</button>
-  <button id="stopRecording" disabled>Stop Recording</button>
-  <audio controls id="audioPlayer"></audio>
-  <form method="POST" action="/transcription" enctype="multipart/form-data">
-      @csrf
-      <input type="file" name="audio" id="audioFile" hidden accept="audio/*">
-      <input type="file" id="hiddenFileInput" style="display:none">
-      <button type="submit" id="submit" disabled>Transcribe</button>
-  </form>
-
-
-<script src="{{ asset('js/record.js') }}"></script>
-<script src="https://cdn.WebRTC-Experiment.com/RecordRTC.js"></script> --}}
-
-
-
-
-
-
-
-
-{{-- <h1>Click mic to record audio</h1>
-<form action="/transcription" method="post" enctype="multipart/form-data">
-    @csrf
-    <input type="file" name="audio" accept="audio/*">
-    <button type="submit">Transcribe</button>
-</form>
-
-
-<li><a href="/" class="under">Back To Home</a></li> --}}
+@endsection

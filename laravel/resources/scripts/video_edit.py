@@ -5,12 +5,15 @@ import os
 from moviepy.editor import *
 import moviepy.video.fx.all as vfx
 
-video_paths = [os.environ['VIDEO1_PATH'], os.environ['VIDEO2_PATH']]
-user_crop_values = tuple(map(int, os.environ['CROP_VALUES'].split(',')))
-user_speed = float(os.environ['SPEED'])
-user_audio_clip = os.environ['AUDIO_CLIP_PATH']
-user_text = os.environ['USER_TEXT']
-output_video_path = os.environ['OUTPUT_VIDEO_PATH']
+import sys
+
+# Replace the os.environ lines with sys.argv
+video_paths = [sys.argv[1], sys.argv[2]]
+user_crop_values = tuple(map(int, sys.argv[3].split(',')))
+user_speed = float(sys.argv[4])
+user_audio_clip = sys.argv[5]
+user_text = sys.argv[6]
+output_video_path = sys.argv[7]
 
 crop_values = user_crop_values
 speed = user_speed

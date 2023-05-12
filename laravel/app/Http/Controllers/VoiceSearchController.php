@@ -17,73 +17,40 @@ class VoiceSearchController extends Controller
         return view('voice.voicesearch');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+    // public function transcribeAudio(Request $request)
+    // {
+    //     $audioData = $request->input('audio');
+    //     $audioContents = base64_decode(preg_replace('#^data:audio/\w+;base64,#i', '', $audioData));
+    //     $apiKey = '4efa68d445b6312768f031147f70b272593c917d';
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+    //     $client = new Client([
+    //         'verify' => storage_path('app/cacert.pem'),
+    //         'timeout' => 30000,
+    //         'connect_timeout' => 30000,
+    //     ]);
+    //     $response = $client->post('https://api.deepgram.com/v1/listen', [
+    //         'headers' => [
+    //             'Authorization' => 'Token ' . $apiKey,
+    //             'Content-Type' => 'audio/wav',
+    //         ],
+    //         'timeout' => 60,
+    //         'connect_timeout' => 60,
+    //         'body' => $audioContents,
+    //     ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+    //     $transcription = json_decode($response->getBody(), true)['results']['channels'][0]['alternatives'][0]['transcript'];
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+    //     // Store the transcription in the session and flash it for the next request
+    //     $request->session()->put('transcription', $transcription);
+    //     return redirect('/shop')->withInput('search', $transcription);
+    // }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+
+
+//     ####working code for another view
     public function transcribeAudio(Request $request)
-{
+    {
     $audioData = $request->input('audio');
     $audioContents = base64_decode(preg_replace('#^data:audio/\w+;base64,#i', '', $audioData));
     $apiKey = '4efa68d445b6312768f031147f70b272593c917d';
@@ -109,31 +76,7 @@ class VoiceSearchController extends Controller
     return redirect('/transcription');
 }
 
-    // public function transcribeAudio(Request $request)
-    // {
-    //     $audioPath = $request->file('audio')->path();
-    //     $apiKey = '4efa68d445b6312768f031147f70b272593c917d';
 
-    //     $client = new Client([
-    //         'verify' => storage_path('app/cacert.pem'),
-    //         'timeout' => 30000, // Increase the timeout value (in seconds)
-    //         'connect_timeout' => 30000, // Increase the connection timeout value (in seconds)
-    //     ]);
-    //     $response = $client->post('https://api.deepgram.com/v1/listen', [
-    //         'headers' => [
-    //             'Authorization' => 'Token ' . $apiKey,
-    //             'Content-Type' => 'audio/wav',
-    //         ],
-    //         'timeout' => 60, // Increase the timeout value (in seconds)
-    //         'connect_timeout' => 60, // Increase the connection timeout value (in seconds)
-    //         'body' => fopen($audioPath, 'r'),
-    //     ]);
-
-    //     $transcription = json_decode($response->getBody(), true)['results']['channels'][0]['alternatives'][0]['transcript'];
-
-    //     // Return the transcription as JSON
-    //     return response()->json(['transcription' => $transcription]);
-    // }
 
     public function showTranscription(Request $request)
     {
@@ -143,10 +86,5 @@ class VoiceSearchController extends Controller
     }
 
 
-//     public function showTranscription(Request $request)
-// {
-//     $transcription = $request->session()->get('transcription', '');
 
-//     return view('voice.transcription', ['transcription' => $transcription]);
-// }
 }

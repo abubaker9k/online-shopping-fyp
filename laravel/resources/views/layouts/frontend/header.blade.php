@@ -34,10 +34,16 @@
 
       </div>
       <div class="search">
+       <?php $search = session()->get('search'); ?>
+       <form class="example" action="{{ url('/shop') }}" style="margin:auto;max-width:300px">
+        <input type="text" placeholder="Search.." name="search" value="{{ request('search') }}" id="searchInput">
+        <button type="submit"><i class="fa fa-search"></i></button>
+      </form>
+{{-- working code
         <form class="example" action="{{ url('/shop') }}" style="margin:auto;max-width:300px">
           <input type="text" placeholder="Search.." name="search" value="">
           <button type="submit"><i class="fa fa-search"></i></button>
-        </form>
+        </form> --}}
         <button class="button" id="Ok"><a href= "{{url('/image-search')}}"><img src="{{ asset('img/header/google lens.webp') }}" alt="car" width="30" height="25"></a></button>
         <button class="button" id="Ok"><a href= "{{url('/voice-search')}}"><img src="{{ asset('img/header/google mic.png') }}" alt="car" width="30" height="25"></a></button>
 
@@ -63,6 +69,17 @@
       <div class="heading1">
         <ion-icon name="menu" class="ham"></ion-icon>
       </div>
+      <script>
+        window.addEventListener('transcriptionCompleted', (event) => {
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                searchInput.value = event.detail.transcription;
+            } else {
+                console.error('Search input not found');
+            }
+        });
+    </script>
+
     </header>
 
 
