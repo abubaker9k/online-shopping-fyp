@@ -14,4 +14,18 @@ class FlaskDataController extends Controller
 
         return view('flask-data', ['data' => $data]);
     }
+    public function runBlenderScript()
+    {
+        set_time_limit(300); // 5 minutes
+
+        // Set the path to the Blender executable and the script
+        $blenderPath = 'D:\\software\\blender\\blender.exe';
+        $scriptPath = storage_path('app/blender_video.py');
+
+        // Run the Blender command with the script
+        $output = shell_exec("$blenderPath -b -P $scriptPath 2>&1");
+
+        // Return the output or an appropriate response
+        return response()->json(['message' => 'Blender script executed', 'output' => $output]);
+    }
 }

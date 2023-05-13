@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShippingController;
 use App\Http\Controllers\ImageSearchController;
+use App\Http\Controllers\FlaskDataController;
 use App\Http\Controllers\VoiceSearchController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\blendermodelController;
@@ -118,5 +119,9 @@ Route::post('/transcription', [VoiceSearchController::class, 'transcribeAudio'])
 Route::get('/test',function () {
     return view('test');
 });
+
+
+Route::get('/run-blender-script' ,  [FlaskDataController::class, 'runBlenderScript']);
+
 
 require __DIR__.'/auth.php';
