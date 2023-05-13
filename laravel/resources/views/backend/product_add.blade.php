@@ -19,19 +19,20 @@
         <x-input-error :messages="$errors->get('category')" class="mt-2" />
     </div>
 
-      <!-- Price -->
-      <div class="mt-4">
-        <x-input-label for="Price" :value="__('Price')" />
-        <x-text-input id="category" class="block mt-1 w-full" type="text" name="price" :value="old('price')" required />
-        <x-input-error :messages="$errors->get('price')" class="mt-2" />
-    </div>
+    <!-- Price -->
+<div class="mt-4">
+    <x-input-label for="price" :value="__('Price')" />
+    <x-text-input id="price" class="block mt-1 w-full" type="text" name="price" :value="old('price')" required />
+    <x-input-error :messages="$errors->get('price')" class="mt-2" />
+</div>
 
-       <!-- Short Description -->
-       <div class="mt-4">
-        <x-input-label for="description" :value="__('description')" />
-        <x-text-input id="category" class="block mt-1 w-full" type="text" name="description" :value="old('description')" required />
-        <x-input-error :messages="$errors->get('description')" class="mt-2" />
-    </div>
+<!--  Description -->
+<div class="mt-4">
+    <x-input-label for="description" :value="__('description')" />
+    <x-text-input id="description" class="block mt-1 w-full" type="text" name="description" :value="old('description')" required />
+    <x-input-error :messages="$errors->get('description')" class="mt-2" />
+</div>
+
 
     {{-- Image upload --}}
     <div class="mt-4">

@@ -34,48 +34,99 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+     public function store(Request $request)
+     {
+         $validatedData = $request->validate([
+             'product_name' => 'required',
+             'category' => 'required',
+             'price' => 'required|numeric',
+             'description' => 'required',
+             'product_image' => 'nullable|image',
+             'product_video' => 'nullable|mimes:mp4',
+             'product_model' => 'required',
+         ]);
 
-public function store(Request $request)
-{
-    $validatedData = $request->validate([
-        'product_name' => 'required',
-        'category' => 'required',
-        'product_image' => 'nullable|image',
-        'product_video' => 'nullable|mimes:mp4',
-        'product_model' => 'required',
-    ]);
+         $product = new Product;
+         $product->product_name = $request->input('product_name');
+         $product->category = $request->input('category');
+         $product->price = $request->input('price');
+         $product->description = $request->input('description');
 
-    $product = new Product;
-    $product->product_name = $request->input('product_name');
-    $product->category = $request->input('category');
+         if ($request->hasFile('product_image')) {
+             $product->product_image = $request->file('product_image')->store('uploads/images', 'public');
+         }
 
-    if ($request->hasFile('product_image')) {
-        $product->product_image = $request->file('product_image')->store('uploads', 'public');
-    }
+         if ($request->hasFile('product_video')) {
+             $product->product_video = $request->file('product_video')->store('uploads/videos', 'public');
+         }
 
-    if ($request->hasFile('product_video')) {
-        $product->product_video = $request->file('product_video')->store('uploads', 'public');
-    }
+         if ($request->hasFile('product_model')) {
+             $file = $request->file('product_model');
+             $extension = $file->getClientOriginalExtension();
+             $allowedExtensions = ['gltf', 'glb', 'obj', 'fbx'];
 
-    if ($request->hasFile('product_model')) {
-        $file = $request->file('product_model');
-        $extension = $file->getClientOriginalExtension();
-        $allowedExtensions = ['gltf', 'glb', 'obj', 'fbx'];
+             if (!in_array($extension, $allowedExtensions)) {
+                 return back()->withErrors(['product_model' => 'Invalid file format. Allowed formats are gltf, glb, obj, and fbx.']);
+             }
 
-        if (!in_array($extension, $allowedExtensions)) {
-            return back()->withErrors(['product_model' => 'Invalid file format. Allowed formats are gltf, glb, obj, and fbx.']);
-        }
+             // Proceed with the file upload
+             $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+             $storedFilePath = $file->storeAs('uploads/models', $originalName . '.' . $extension, 'public');
+             $product->product_model = $storedFilePath;
+         } else {
+             return back()->withErrors(['product_model' => 'No file provided.']);
+         }
 
-        // Proceed with the file upload
-        $storedFilePath = $file->storePublicly('models', 'public');
-        $product->product_model = $storedFilePath;
-    } else {
-        return back()->withErrors(['product_model' => 'No file provided.']);
-    }
+         $product->save();
+         return view('dashboard');
+     }
 
-    $product->save();
-    return view('dashboard');
-}
+    //  public function store(Request $request)
+    //  {
+    //      $validatedData = $request->validate([
+    //          'product_name' => 'required',
+    //          'category' => 'required',
+    //          'price' => 'required|numeric',
+    //          'description' => 'required',
+    //          'product_image' => 'nullable|image',
+    //          'product_video' => 'nullable|mimes:mp4',
+    //          'product_model' => 'required',
+    //      ]);
+
+    //      $product = new Product;
+    //      $product->product_name = $request->input('product_name');
+    //      $product->category = $request->input('category');
+    //      $product->price = $request->input('price');
+    //      $product->description = $request->input('description');
+
+    //      if ($request->hasFile('product_image')) {
+    //          $product->product_image = $request->file('product_image')->store('uploads/images', 'public');
+    //      }
+
+    //      if ($request->hasFile('product_video')) {
+    //          $product->product_video = $request->file('product_video')->store('uploads/videos', 'public');
+    //      }
+
+    //      if ($request->hasFile('product_model')) {
+    //          $file = $request->file('product_model');
+    //          $extension = $file->getClientOriginalExtension();
+    //          $allowedExtensions = ['gltf', 'glb', 'obj', 'fbx'];
+
+    //          if (!in_array($extension, $allowedExtensions)) {
+    //              return back()->withErrors(['product_model' => 'Invalid file format. Allowed formats are gltf, glb, obj, and fbx.']);
+    //          }
+
+    //          // Proceed with the file upload
+    //          $storedFilePath = $file->storePublicly('uploads/models', 'public');
+    //          $product->product_model = $storedFilePath;
+    //      } else {
+    //          return back()->withErrors(['product_model' => 'No file provided.']);
+    //      }
+
+    //      $product->save();
+    //      return view('dashboard');
+    //  }
+
 
 
 

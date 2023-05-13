@@ -76,7 +76,7 @@ Route::get('/edit_3dmodel', function () {
 
 
 
-
+//adding the product to database
 Route::post('/product', [ProductController::class,'store']);
 
 
