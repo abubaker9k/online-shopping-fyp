@@ -48,7 +48,7 @@ Route::get('/image-search',[ImageSearchController::class,'index']);
 
 
 Route::get('/individual/{id}', [ProductController::class,'show']);
-Route::get('/cart/{id}', [ProductController::class,'show_cart']);
+// Route::get('/cart/{id}', [ProductController::class,'show_cart']);
 
 // Route::get('/cart', function () {
 //     return view('shop/cartpage');
@@ -103,7 +103,7 @@ Route::post('/visual-search', [VisualController::class,'search']);
 
 Route::post('/process', [blendermodelController::class,'process'] )->name('process');
 
-Route::post('/process-video', [VideoController::class, 'processVideo'])->name('process');
+Route::post('/process-video', [VideoController::class, 'processVideo'])->name('process-video');
 
 Route::get('/process-video', function () {
     return view('process_video');

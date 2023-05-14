@@ -156,13 +156,13 @@ class ProductController extends Controller
         return view('shop.individual')->with($data);
     }
 
-    public function show_cart($id)
-    {
+    // public function show_cart($id)
+    // {
 
-        $product = Product::find($id);
-        $data = compact('product');
-        return view('shop.cart')->with($data);
-    }
+    //     $product = Product::find($id);
+    //     $data = compact('product');
+    //     return view('shop.cart')->with($data);
+    // }
 
     /**
      * Show the form for editing the specified resource.

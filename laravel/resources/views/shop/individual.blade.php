@@ -90,7 +90,7 @@
     <!-- Product Pricing -->
     <div class="product-price">
       <span>148$</span>
-      <a href="{{ url('/cart') }}/{{ $product->product_id }}" class="cart-btn">Add to cart</a>
+      <a href="{{ url('/shipping') }}" class="cart-btn">Add to Shipping</a>
     </div>
   </div>
 </main>

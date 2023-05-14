@@ -11,10 +11,47 @@ use Illuminate\Http\JsonResponse;
 class VideoController extends Controller
 {
 
-#code for flask api
 
+    public function processVideo(Request $request)
+    {
+        $request->validate([
+            'video1' => 'required|mimes:mp4',
+            'video2' => 'required|mimes:mp4',
+            'user_audio_clip' => 'nullable|mimes:mp3',
+        ]);
 
+        $video1 = $request->file('video1')->store('videos');
+        $video2 = $request->file('video2')->store('videos');
+        $audio_clip = $request->file('user_audio_clip') ? $request->file('user_audio_clip')->store('audio') : '';
+        $text = $request->input('user_text');
+        $crop_values = implode(',', $request->input('user_crop_values'));
+        $speed = $request->input('user_speed');
+        $output_video = public_path('output_video.mp4');
 
+        $python_executable = 'D:\software\python\python.exe';
+        $python_script = 'D:\\codes\\online-shopping-fyp\\laravel\\resources\\scripts\\video_edit.py';
+        $command = [
+            $python_executable,
+            $python_script,
+            $video1,
+            $video2,
+            $crop_values,
+            $speed,
+            $audio_clip,
+            $text,
+            $output_video
+        ];
+
+        $process = new Process($command);
+        $process->run();
+
+        // Check if the script executed successfully
+        if (!$process->isSuccessful()) {
+            throw new ProcessFailedException($process);
+        }
+
+        return response()->download($output_video);
+    }
 
     // working code without flask
     // public function processVideo(Request $request)

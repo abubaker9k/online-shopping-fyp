@@ -1,30 +1,42 @@
 <x-app-layout>
+    <div class="form-styling">
+        <div>
     <form action="{{ url('/process-video') }}" method="post" enctype="multipart/form-data">
         @csrf
+        <div>
         <!-- Add new fields for user_text, user_crop_values, user_speed, and user_audio_clip -->
         <label for="user_text">User Text:</label>
         <input type="text" name="user_text" id="user_text">
+        </div>
 
+        <div>
         <label for="user_crop_values">Crop Values (x1, y1, x2, y2):</label>
         <input type="text" name="user_crop_values[]" id="user_crop_values[]">
-
+        </div>
         <label for="user_speed">Speed:</label>
         <input type="number" name="user_speed" id="user_speed">
-
+        <div>
         <label for="user_audio_clip">Audio Clip:</label>
         <input type="file" name="user_audio_clip" id="user_audio_clip">
-        <br>
+        </div>
+
 
         <!-- Keep the existing form fields -->
+        <div>
         <label >Video 1</label>
         <input type="file" name="video1" id="video1" required>
+        </div>
+        <div>
         <label >Video 2</label>
         <input type="file" name="video2" id="video2" required>
-
+        </div>
         <!-- Keep the existing form input -->
+        <div>
         <input type="submit" value="Process Video">
+        </div>
          </form>
-
+        </div>
+    </div>
 
 
     {{-- working code
