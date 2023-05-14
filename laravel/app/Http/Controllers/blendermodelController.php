@@ -6,76 +6,159 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use Symfony\Component\Process\Process;
+use Symfony\Component\Process\Exception\ProcessFailedException;
 
 
 class blendermodelController extends Controller
 {
 
+    public function renderBlenderVideo(Request $request)
+{
+    $blenderPath = 'D:\software\blender\blender.exe';
+$pythonScriptPath = 'D:\codes\online-shopping-fyp\laravel\resources\scripts\blender_video.py';
+$modelPath = 'D:\blender\tent.glb';
+
+$process = new Process([
+    $blenderPath,
+    '--background',
+    '--python',
+    $pythonScriptPath,
+    '--',
+    $modelPath
+], null, [
+    'SYSTEMROOT' => getenv('SYSTEMROOT'),
+    'PATH' => getenv('PATH')
+]);
+
+$process->run();
+
+if (!$process->isSuccessful()) {
+    // Handle the error
+    throw new \RuntimeException($process->getErrorOutput());
+}
+
+$output = $process->getOutput();
+}
 
 
-    public function process(Request $request)
-    {
-        // Validation rules
-        $rules = [
-            'model' => 'required|file',
-            'color' => 'required|string',
-        ];
+//     public function renderBlenderVideo($modelPath)
+// {
+//     $blender_executable = 'D:\\software\\blender\\blender.exe'; // Use the full path to the blender executable if it's not in the PATH
+//     $python_script = 'D:\\codes\\online-shopping-fyp\\laravel\\resources\\scripts\\blender_video.py';
+//     $modelPath='D:\\blender\\tent.glb';
+//     $command = [
+//         $blender_executable,
+//         '--background',
+//         '--python',
+//         $python_script,
+//         '--',
+//         $modelPath
+//     ];
 
-        // Validate the request data
-        $validatedData = $request->validate($rules);
+//     $process = new Process($command);
+//     $process->run();
 
-        // Save the 3D model and RGB color as temporary files
-        $modelFile = $request->file('model');
-        $modelExtension = $modelFile->getClientOriginalExtension();
-        $modelPath = $modelFile->storeAs('temp', $modelFile->hashName() . '.' . $modelExtension);
-        $colorPath = Storage::put('temp/color.txt', $validatedData['color']);
+//     // Check if the script executed successfully
+//     if (!$process->isSuccessful()) {
+//         throw new ProcessFailedException($process);
+//     }
 
-        // Store the paths in the session
-        session(['modelPath' => $modelPath, 'colorPath' => $colorPath]);
-        // return redirect()->route('edit_3dmodel')
-        //     ->with('success', 'Validation successful')
-        //     ->with('modelPath', $modelPath)
-        //     ->with('colorPath', $colorPath);
+//     // Return a response, for example, a JSON response with a success message
+//     return response()->json(['message' => 'Blender script executed successfully']);
+// }
 
+public function uploadGltf(Request $request)
+{
+    // dd($request);
+    // dd($request->file('model'));
 
-        // Call the Blender script with the input arguments
-        $blenderPath = env('BLENDER_PATH');
-        $pythonScript = base_path('scripts\change_color.py');
-        $outputPath = 'D:\\codes\\online-shopping-fyp\\laravel\\storage\\app\\public\\models';
-        $outputName = uniqid() . '.obj';
-        if (is_writable($outputPath)) {
-            echo "The output directory is writable.";
-        } else {
-            echo "The output directory is not writable.";
-        }
+    $request->validate([
+        'model' => 'required|mimes:glb'
+    ]);
 
-        $output = [];
-$return_var = null;
+    $model = $request->file('model');
+    $modelPath = $model->storeAs('public/models', $model->getClientOriginalName());
 
-$command = "{$blenderPath} --background --python {$pythonScript} -- {$modelPath} {$outputPath}\\{$outputName} {$colorPath}";
-exec($command, $output, $return_var);
+    // Check if $modelPath is null or not
+    if (isset($modelPath)) {
+        // Call your renderBlenderVideo method here and pass the model path
+        $response = $this->renderBlenderVideo($modelPath);
+    } else {
+        // Handle the case when $modelPath is null
+        // You can return an error message or do something else
+        return back()->withErrors(['model' => 'Failed to upload the model.']);
+    }
 
-if ($return_var === 0) {
-    echo "Command executed successfully.";
-} else {
-    echo "Command failed with return value: {$return_var}";
+    return $response;
 }
 
 
 
-        $command = "{$blenderPath} --background --python {$pythonScript} -- {$modelPath} {$outputPath}\\{$outputName} {$colorPath}";
 
-        exec($command);
+//     public function process(Request $request)
+//     {
+//         // Validation rules
+//         $rules = [
+//             'model' => 'required|file',
+//             'color' => 'required|string',
+//         ];
 
-        return redirect()->route('edit_3dmodel')
-    ->with('success', 'Validation successful')
-    ->with('modelPath', $modelPath)
-    ->with('colorPath', $colorPath)
-    ->with('blenderPath', $blenderPath)
-    ->with('outputName', $outputName)
-    ->with('command', $command);
+//         // Validate the request data
+//         $validatedData = $request->validate($rules);
 
-    }
+//         // Save the 3D model and RGB color as temporary files
+//         $modelFile = $request->file('model');
+//         $modelExtension = $modelFile->getClientOriginalExtension();
+//         $modelPath = $modelFile->storeAs('temp', $modelFile->hashName() . '.' . $modelExtension);
+//         $colorPath = Storage::put('temp/color.txt', $validatedData['color']);
+
+//         // Store the paths in the session
+//         session(['modelPath' => $modelPath, 'colorPath' => $colorPath]);
+//         // return redirect()->route('edit_3dmodel')
+//         //     ->with('success', 'Validation successful')
+//         //     ->with('modelPath', $modelPath)
+//         //     ->with('colorPath', $colorPath);
+
+
+//         // Call the Blender script with the input arguments
+//         $blenderPath = env('BLENDER_PATH');
+//         $pythonScript = base_path('scripts\change_color.py');
+//         $outputPath = 'D:\\codes\\online-shopping-fyp\\laravel\\storage\\app\\public\\models';
+//         $outputName = uniqid() . '.obj';
+//         if (is_writable($outputPath)) {
+//             echo "The output directory is writable.";
+//         } else {
+//             echo "The output directory is not writable.";
+//         }
+
+//         $output = [];
+// $return_var = null;
+
+// $command = "{$blenderPath} --background --python {$pythonScript} -- {$modelPath} {$outputPath}\\{$outputName} {$colorPath}";
+// exec($command, $output, $return_var);
+
+// if ($return_var === 0) {
+//     echo "Command executed successfully.";
+// } else {
+//     echo "Command failed with return value: {$return_var}";
+// }
+
+
+
+//         $command = "{$blenderPath} --background --python {$pythonScript} -- {$modelPath} {$outputPath}\\{$outputName} {$colorPath}";
+
+//         exec($command);
+
+//         return redirect()->route('edit_3dmodel')
+//     ->with('success', 'Validation successful')
+//     ->with('modelPath', $modelPath)
+//     ->with('colorPath', $colorPath)
+//     ->with('blenderPath', $blenderPath)
+//     ->with('outputName', $outputName)
+//     ->with('command', $command);
+
+//     }
         // // Delete the temporary files
         // Storage::delete([$modelPath, $colorPath]);
 

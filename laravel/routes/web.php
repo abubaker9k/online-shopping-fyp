@@ -109,6 +109,15 @@ Route::get('/process-video', function () {
     return view('process_video');
 });
 
+
+
+
+Route::get('/render-blender-video', [blendermodelController::class, 'renderBlenderVideo']);
+
+//3D model upload
+Route::post('/upload-gltf', [blendermodelController::class, 'renderBlenderVideo']);
+
+
 Route::get('/run-python', [VideoController::class, 'runPythonScript']);
 
 Route::get('/voice-search',[VoiceSearchController::class,'index']);

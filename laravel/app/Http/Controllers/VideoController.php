@@ -28,7 +28,7 @@ class VideoController extends Controller
         $speed = $request->input('user_speed');
         $output_video = public_path('output_video.mp4');
 
-        $python_executable = 'D:\software\python\python.exe';
+        $python_executable = 'D:\software\python37\python.exe';
         $python_script = 'D:\\codes\\online-shopping-fyp\\laravel\\resources\\scripts\\video_edit.py';
         $command = [
             $python_executable,

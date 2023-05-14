@@ -1,4 +1,4 @@
-@if (session('coloredModelUrl'))
+{{-- @if (session('coloredModelUrl'))
     <div class="alert alert-info">
         Colored Model URL: {{ session('coloredModelUrl') }}
     </div>
@@ -11,16 +11,24 @@
         Output Name: {{ session('outputName') }}<br>
         Command: {{ session('command') }}
     </div>
-@endif
+@endif --}}
 
-<form id="model-form" action="{{ route('process') }}" method="POST" enctype="multipart/form-data">
-    @csrf
-    <label for="model">Upload 3D Model:</label>
-    <input type="file" name="model" required>
-    <label for="color">Color (RGB):</label>
-    <input type="color" name="color" value="#ff0000" required>
-    <button type="submit">Submit</button>
-</form>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload glTF Model</title>
+</head>
+<body>
+    <h1>Upload glTF Model (GLB Format)</h1>
+    <form action="/upload-gltf" method="POST" enctype="multipart/form-data">
+        @csrf
+        <label for="model">Model:</label>
+        <input type="file" name="model" id="model" required>
+        <br>
+        <button type="submit">Upload</button>
+    </form>
+</body>
+</html>
 
 
 
