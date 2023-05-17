@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\Process\Process;
+use App\Models\Product;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 
 
@@ -15,6 +16,7 @@ class blendermodelController extends Controller
 
     public function renderBlenderVideo(Request $request)
 {
+    set_time_limit(300); // 5 minutes
     $blenderPath = 'D:\software\blender\blender.exe';
 $pythonScriptPath = 'D:\codes\online-shopping-fyp\laravel\resources\scripts\blender_video.py';
 $modelPath = 'D:\blender\tent.glb';
@@ -94,7 +96,14 @@ public function uploadGltf(Request $request)
 }
 
 
+public function show($id)
+    {
 
+        $product = Product::find($id);
+        $data = compact('product');
+        // dd($data);
+        return view('test')->with($data);
+    }
 
 //     public function process(Request $request)
 //     {

@@ -35,7 +35,7 @@
       </div>
       <div class="search">
        <?php $search = session()->get('search'); ?>
-       <form class="example" action="{{ url('/shop') }}" style="margin:auto;max-width:300px">
+       <form id="searchForm" class="example" action="{{ url('/shop') }}" style="margin:auto;max-width:300px">
         <input type="text" placeholder="Search.." name="search" value="{{ request('search') }}" id="searchInput">
         <button type="submit"><i class="fa fa-search"></i></button>
       </form>

@@ -121,13 +121,15 @@ Route::post('/upload-gltf', [blendermodelController::class, 'renderBlenderVideo'
 Route::get('/run-python', [VideoController::class, 'runPythonScript']);
 
 Route::get('/voice-search',[VoiceSearchController::class,'index']);
-Route::get('/transcription', [VoiceSearchController::class, 'showTranscription']);
+Route::get('/shop1', [VoiceSearchController::class, 'showTranscription']);
 
 Route::post('/transcription', [VoiceSearchController::class, 'transcribeAudio']);
 
 Route::get('/test',function () {
     return view('test');
 });
+
+Route::get('/view3D/{id}', [blendermodelController::class, 'show']);
 
 
 Route::get('/run-blender-script' ,  [FlaskDataController::class, 'runBlenderScript']);

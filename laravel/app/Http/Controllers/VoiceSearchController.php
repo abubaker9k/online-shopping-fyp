@@ -72,8 +72,8 @@ class VoiceSearchController extends Controller
 
     $transcription = json_decode($response->getBody(), true)['results']['channels'][0]['alternatives'][0]['transcript'];
 
-    $request->session()->put('transcription', $transcription);
-    return redirect('/transcription');
+    return redirect('/shop?search=' . urlencode($transcription));
+
 }
 
 

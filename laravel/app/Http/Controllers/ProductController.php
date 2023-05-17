@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
+use App\Rules\GlbFileRule;
+
 
 class ProductController extends Controller
 {
@@ -43,7 +45,7 @@ class ProductController extends Controller
              'description' => 'required',
              'product_image' => 'nullable|image',
              'product_video' => 'nullable|mimes:mp4',
-             'product_model' => 'required',
+            //  'product_model' => 'required|mimetypes:gltf,glb'
          ]);
 
          $product = new Product;
@@ -63,10 +65,10 @@ class ProductController extends Controller
          if ($request->hasFile('product_model')) {
              $file = $request->file('product_model');
              $extension = $file->getClientOriginalExtension();
-             $allowedExtensions = ['gltf', 'glb', 'obj', 'fbx'];
+             $allowedExtensions = ['gltf','glb'];
 
              if (!in_array($extension, $allowedExtensions)) {
-                 return back()->withErrors(['product_model' => 'Invalid file format. Allowed formats are gltf, glb, obj, and fbx.']);
+                 return back()->withErrors(['product_model' => 'Invalid file format. Allowed formats are gltf, glb']);
              }
 
              // Proceed with the file upload
@@ -153,6 +155,7 @@ class ProductController extends Controller
 
         $product = Product::find($id);
         $data = compact('product');
+        // dd($data);
         return view('shop.individual')->with($data);
     }
 
@@ -210,6 +213,7 @@ class ProductController extends Controller
         }
 
         $data = compact('product','search');
+
         return view('shop.shop')->with($data);
     }
 

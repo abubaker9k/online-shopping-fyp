@@ -91,6 +91,7 @@
     <div class="product-price">
       <span>148$</span>
       <a href="{{ url('/shipping') }}" class="cart-btn">Add to Shipping</a>
+      <a href="{{ url('/view3D')}}/{{ $product->product_id }} " class="cart-btn">3D View</a>
     </div>
   </div>
 </main>
