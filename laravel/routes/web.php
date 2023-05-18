@@ -115,7 +115,7 @@ Route::get('/process-video', function () {
 Route::get('/render-blender-video', [blendermodelController::class, 'renderBlenderVideo']);
 
 //3D model upload
-Route::post('/upload-gltf', [blendermodelController::class, 'renderBlenderVideo']);
+Route::post('/upload-gltf', [blendermodelController::class, 'uploadGltf']);
 
 
 Route::get('/run-python', [VideoController::class, 'runPythonScript']);

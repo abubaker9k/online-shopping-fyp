@@ -7,26 +7,26 @@ bpy.ops.wm.open_mainfile(filepath="D:\\blender\\test.blend")
 model_path = sys.argv[-1]
 bpy.ops.import_scene.gltf(filepath=model_path)
 
-# Remove existing materials
-obj = bpy.context.selected_objects[0]
-obj.data.materials.clear()
+# # Remove existing materials
+# obj = bpy.context.selected_objects[0]
+# obj.data.materials.clear()
 
-# Load the image as a texture
-image_path = "D:\\blender\\texture.jpeg"
-texture_image = bpy.data.images.load(image_path)
-texture = bpy.data.textures.new('ImageTexture', type='IMAGE')
-texture.image = texture_image
+# # Load the image as a texture
+# image_path = "D:\\blender\\texture.jpeg"
+# texture_image = bpy.data.images.load(image_path)
+# texture = bpy.data.textures.new('ImageTexture', type='IMAGE')
+# texture.image = texture_image
 
-# Create a material for the object
-material = bpy.data.materials.new("ObjectMaterial")
-material.use_nodes = True
-bsdf_node = material.node_tree.nodes["Principled BSDF"]
-tex_image_node = material.node_tree.nodes.new("ShaderNodeTexImage")
-tex_image_node.image = texture_image
-material.node_tree.links.new(bsdf_node.inputs["Base Color"], tex_image_node.outputs["Color"])
+# # Create a material for the object
+# material = bpy.data.materials.new("ObjectMaterial")
+# material.use_nodes = True
+# bsdf_node = material.node_tree.nodes["Principled BSDF"]
+# tex_image_node = material.node_tree.nodes.new("ShaderNodeTexImage")
+# tex_image_node.image = texture_image
+# material.node_tree.links.new(bsdf_node.inputs["Base Color"], tex_image_node.outputs["Color"])
 
-# Assign the material to the object
-obj.data.materials.append(material)
+# # Assign the material to the object
+# obj.data.materials.append(material)
 
 camera = bpy.data.objects['Camera']
 bpy.context.scene.camera = camera
@@ -44,7 +44,7 @@ bpy.context.scene.frame_end = 100
 # Render the animation
 bpy.ops.render.render(animation=True)
 
-bpy.ops.export_scene.gltf(filepath="D:\\blender\\new1.blender")
+bpy.ops.export_scene.gltf(filepath="D:\\blender\\new1")
 
 
 

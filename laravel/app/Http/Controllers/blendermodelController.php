@@ -14,86 +14,123 @@ use Symfony\Component\Process\Exception\ProcessFailedException;
 class blendermodelController extends Controller
 {
 
-    public function renderBlenderVideo(Request $request)
-{
-    set_time_limit(300); // 5 minutes
-    $blenderPath = 'D:\software\blender\blender.exe';
-$pythonScriptPath = 'D:\codes\online-shopping-fyp\laravel\resources\scripts\blender_video.py';
-$modelPath = 'D:\blender\tent.glb';
+    public function uploadGltf(Request $request)
+    {
+        // dd($request);
+        $request->validate([
+            'model' => 'required|'
+        ]);
 
-$process = new Process([
-    $blenderPath,
-    '--background',
-    '--python',
-    $pythonScriptPath,
-    '--',
-    $modelPath
-], null, [
-    'SYSTEMROOT' => getenv('SYSTEMROOT'),
-    'PATH' => getenv('PATH')
-]);
+        $model = $request->file('model');
+        $modelPath = $model->storeAs('public/models', uniqid() . '.' . $model->getClientOriginalExtension());
 
-$process->run();
+        // dd($modelPath);
+        if (isset($modelPath)) {
+            $response = $this->renderBlenderVideo($modelPath);
+        } else {
+            return back()->withErrors(['model' => 'Failed to upload the model.']);
+        }
 
-if (!$process->isSuccessful()) {
-    // Handle the error
-    throw new \RuntimeException($process->getErrorOutput());
-}
-
-$output = $process->getOutput();
-}
-
-
-//     public function renderBlenderVideo($modelPath)
-// {
-//     $blender_executable = 'D:\\software\\blender\\blender.exe'; // Use the full path to the blender executable if it's not in the PATH
-//     $python_script = 'D:\\codes\\online-shopping-fyp\\laravel\\resources\\scripts\\blender_video.py';
-//     $modelPath='D:\\blender\\tent.glb';
-//     $command = [
-//         $blender_executable,
-//         '--background',
-//         '--python',
-//         $python_script,
-//         '--',
-//         $modelPath
-//     ];
-
-//     $process = new Process($command);
-//     $process->run();
-
-//     // Check if the script executed successfully
-//     if (!$process->isSuccessful()) {
-//         throw new ProcessFailedException($process);
-//     }
-
-//     // Return a response, for example, a JSON response with a success message
-//     return response()->json(['message' => 'Blender script executed successfully']);
-// }
-
-public function uploadGltf(Request $request)
-{
-    // dd($request);
-    // dd($request->file('model'));
-
-    $request->validate([
-        'model' => 'required|mimes:glb'
-    ]);
-
-    $model = $request->file('model');
-    $modelPath = $model->storeAs('public/models', $model->getClientOriginalName());
-
-    // Check if $modelPath is null or not
-    if (isset($modelPath)) {
-        // Call your renderBlenderVideo method here and pass the model path
-        $response = $this->renderBlenderVideo($modelPath);
-    } else {
-        // Handle the case when $modelPath is null
-        // You can return an error message or do something else
-        return back()->withErrors(['model' => 'Failed to upload the model.']);
+        // return $response;
     }
 
-    return $response;
-}
+
+    public function renderBlenderVideo($modelPath)
+    {
+        set_time_limit(900); // 5 minutes
+        $blenderPath = 'D:\software\blender\blender.exe';
+        $pythonScriptPath = 'D:\codes\online-shopping-fyp\laravel\resources\scripts\blender_video.py';
+
+        // Add the base path to the model path
+        $basePath = 'D:\codes\online-shopping-fyp\laravel\storage\app\\';
+        $fullModelPath = $basePath . $modelPath;
+
+        $process = new Process([
+            $blenderPath,
+            '--background',
+            '--python',
+            $pythonScriptPath,
+            $fullModelPath
+        ], null, [
+            'SYSTEMROOT' => getenv('SYSTEMROOT'),
+            'PATH' => getenv('PATH')
+        ]);
+
+        $process->setTimeout(900);
+        $process->run();
+
+        if (!$process->isSuccessful()) {
+            // Handle the error
+            $errorOutput = $process->getErrorOutput();
+            echo "Error output: " . $errorOutput;
+            throw new \RuntimeException($errorOutput);
+
+        }
+
+        $output = $process->getOutput();
+    }
+
+
+
+
+
+
+
+//     public function renderBlenderVideo(Request $request)
+// {
+//     set_time_limit(300); // 5 minutes
+//     $blenderPath = 'D:\software\blender\blender.exe';
+// $pythonScriptPath = 'D:\codes\online-shopping-fyp\laravel\resources\scripts\blender_video.py';
+// $modelPath = 'D:\blender\tent.glb';
+
+// $process = new Process([
+//     $blenderPath,
+//     '--background',
+//     '--python',
+//     $pythonScriptPath,
+//     '--',
+//     $modelPath
+// ], null, [
+//     'SYSTEMROOT' => getenv('SYSTEMROOT'),
+//     'PATH' => getenv('PATH')
+// ]);
+// $process->setTimeout(300);
+// $process->run();
+
+// if (!$process->isSuccessful()) {
+//     // Handle the error
+//     throw new \RuntimeException($process->getErrorOutput());
+// }
+
+// $output = $process->getOutput();
+// }
+
+
+
+// public function uploadGltf(Request $request)
+// {
+//     // dd($request);
+//     // dd($request->file('model'));
+
+//     $request->validate([
+//         'model' => 'required|mimes:glb'
+//     ]);
+
+//     $model = $request->file('model');
+//     $modelPath = $model->storeAs('public/models', $model->getClientOriginalName());
+
+//     // Check if $modelPath is null or not
+//     // if (isset($modelPath)) {
+//     //     // Call your renderBlenderVideo method here and pass the model path
+//     //     $response = $this->renderBlenderVideo();
+//     // } else {
+//     //     // Handle the case when $modelPath is null
+//     //     // You can return an error message or do something else
+//     //     return back()->withErrors(['model' => 'Failed to upload the model.']);
+//     // }
+
+//     // return $response;
+// }
 
 
 public function show($id)
@@ -271,3 +308,6 @@ public function show($id)
 
     //     return redirect()->route('edit_3dmodel')->with('success', 'Validation successful');
     // }
+
+
+
