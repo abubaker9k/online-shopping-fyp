@@ -24,8 +24,6 @@ use App\Models\Product;
 |
 */
 
-
-
 //home page
 Route::get('/', [ProductController::class,'home_view'])->name('home');
 
@@ -113,6 +111,8 @@ Route::get('/process-video', function () {
 
 
 Route::get('/render-blender-video', [blendermodelController::class, 'renderBlenderVideo']);
+
+Route::get('/create-blender-video', [blendermodelController::class, 'createBlenderVideo']);
 
 //3D model upload
 Route::post('/upload-gltf', [blendermodelController::class, 'uploadGltf']);

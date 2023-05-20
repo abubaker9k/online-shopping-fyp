@@ -51,7 +51,8 @@
                 @foreach ($trending_products as $product)
                 <div class="items">
 
-                  <div class="img img1"><button class="button" id="Ok"><a href="{{ url('/individual') }}/{{ $product->product_id }}"><img src="{{ asset('storage/'.$product->product_image) }}" alt="{{ $product->product_name }}"></a></div></button>
+                  <div class="img img1"><button class="button" id="Ok"><a href="{{ url('/individual') }}/{{ $product->product_id }}">
+                    <img src="{{ asset('storage/uploads/images/' . $product->product_image) }}" alt="Product Image"></a></div></button>
                   <div class="name">{{ $product->product_name }}</div>
                   <div class="price">{{ $product->category }}</div>
                   <div class="info">Lorem ipsum dolor sit amet consectetur.</div>
@@ -66,4 +67,3 @@
 
 
 @endsection
-

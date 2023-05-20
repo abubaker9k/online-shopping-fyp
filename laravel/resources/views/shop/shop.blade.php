@@ -16,7 +16,8 @@
                     <div class="img img1">
                         <button class="button" id="Ok">
                             <a href="{{ url('/individual') }}/{{ $product->product_id }}">
-                                <img src="{{ asset('storage/'.$product->product_image) }}" alt="Product Image">
+                                <img src="{{ asset('storage/uploads/images/' . $product->product_image) }}" alt="Product Image">
+
                             </a>
                         </button>
                     </div>
