@@ -13,12 +13,8 @@
     </div>
 @endif --}}
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Upload glTF Model</title>
-</head>
-<body>
+<x-app-layout>
+
     <h1>Upload glTF Model (GLB Format)</h1>
     <form action="/upload-gltf" method="POST" enctype="multipart/form-data">
         @csrf
@@ -27,9 +23,8 @@
         <br>
         <button type="submit">Upload</button>
     </form>
-</body>
-</html>
 
+</x-app-layout>
 
 
 {{--

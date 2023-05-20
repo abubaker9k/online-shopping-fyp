@@ -1,6 +1,7 @@
 
-<x-guest-layout>
+    @extends('layouts.frontend.main')
 
+    @section('main-section')
     <form method="POST" action="{{ url('/') }}/shipping-confirm">
         @csrf
 
@@ -51,4 +52,5 @@
             </x-primary-button>
         </div>
     </form>
-</x-guest-layout>
+    @endsection
+
